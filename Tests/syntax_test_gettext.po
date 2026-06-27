@@ -81,8 +81,8 @@ msgstr ""
 #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
 #          ^ punctuation.definition.string.begin.po
 #                                       ^ punctuation.definition.string.end.po
-    
-#^ - meta.block
+
+# <- meta.fold.end - meta.block
     #: src/msgcmp.c:338 src/po-lex.c:699
 #^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
 #   ^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
