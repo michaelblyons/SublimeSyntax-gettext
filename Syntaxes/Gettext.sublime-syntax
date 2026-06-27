@@ -10,9 +10,6 @@ file_extensions:
   - pot
   - potx
 
-# TODO: Command for copy original to untranslated, label as fuzzy,
-#       remove fuzzy, next fuzzy, etc
-
 contexts:
   main:
     # Find indicators that the header has ended...

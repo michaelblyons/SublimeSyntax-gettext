@@ -2,9 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>comment</key>
-	<string>TODO:  Command for copy original to untranslated, label as fuzzy, remove fuzzy,
-next fuzzy etc</string>
 	<key>fileTypes</key>
 	<array>
 		<string>po</string>
