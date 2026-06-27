@@ -45,8 +45,9 @@ Package Control will keep all installed packages up-to-date!
 
 ## Todo
 
-- Syntax regression tests
+- ~~Syntax regression tests~~
 - Investigate "range" flags
+- Custom fold markers
 - `printf` and other string formatting placeholders
 - Plurals mini-language in header
 - Navigation by `fuzzy` or unfinished translations
