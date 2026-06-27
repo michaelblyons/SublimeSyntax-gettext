@@ -3,10 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>comment</key>
-	<string>
-TODO:  Command for copy original to untranslated, label as fuzzy, remove fuzzy, next fuzzy etc
-Create meta scope for each entry
-</string>
+	<string>TODO:  Command for copy original to untranslated, label as fuzzy, remove fuzzy,
+next fuzzy etc</string>
 	<key>fileTypes</key>
 	<array>
 		<string>po</string>
@@ -16,16 +14,16 @@ Create meta scope for each entry
 	<key>keyEquivalent</key>
 	<string>^~G</string>
 	<key>name</key>
-	<string>Gettext</string>
+	<string>gettext Portable Object (PO)</string>
 	<key>patterns</key>
 	<array>
 		<dict>
 			<key>begin</key>
-			<string>^(?=(msgid(_plural)?|msgctxt)\s*"[^"])|^\s*$</string>
+			<string>(?=#[:,|~=.]|msg(?:id|str)(?!\s+""))</string>
 			<key>comment</key>
 			<string>Start of body of document, after header</string>
 			<key>end</key>
-			<string>\z</string>
+			<string>\b\B</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -36,182 +34,186 @@ Create meta scope for each entry
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#comments</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>^msg(id|str)\s+""\s*$\n?</string>
-			<key>name</key>
-			<string>comment.line.number-sign.po</string>
-		</dict>
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>constant.language.po</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.separator.key-value.po</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>string.other.po</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>^"(?:([^\s:]+)(:)\s+)?([^"]*)"\s*$\n?</string>
-			<key>name</key>
-			<string>meta.header.po</string>
+			<string>#header</string>
 		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>body</key>
+		<key>blocks</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>^(msgid(_plural)?)\s+</string>
-					<key>beginCaptures</key>
+					<string>(?=\S)</string>
+					<key>contentName</key>
+					<string>meta.block.po</string>
+					<key>end</key>
+					<string>^\s*$\n?</string>
+					<key>endCaptures</key>
 					<dict>
-						<key>1</key>
+						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.control.msgid.po</string>
+							<string>meta.fold.end.po</string>
 						</dict>
 					</dict>
-					<key>end</key>
-					<string>^(?!")</string>
-					<key>name</key>
-					<string>meta.scope.msgid.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>begin</key>
-							<string>(\G|^)"</string>
-							<key>end</key>
-							<string>"</string>
+							<key>include</key>
+							<string>#line-comments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#keywords</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>body</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#blocks</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comma-separators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>,</string>
+					<key>name</key>
+					<string>punctuation.separator.po</string>
+				</dict>
+			</array>
+		</dict>
+		<key>flags</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\bfuzzy\b</string>
+					<key>name</key>
+					<string>storage.modifier.po</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format</string>
+					<key>name</key>
+					<string>variable.annotation.po</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\bno-wrap\b</string>
+					<key>name</key>
+					<string>variable.annotation.po</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comma-separators</string>
+				</dict>
+			</array>
+		</dict>
+		<key>header</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-normal</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>^"</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
 							<key>name</key>
-							<string>string.quoted.double.po</string>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>"$\n</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.po</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>comment.block.documentation.po</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string-contents</string>
+						</dict>
+						<dict>
+							<key>begin</key>
+							<string>\G([\w-]+)(:)</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>constant.language.po</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.key-value.po</string>
+								</dict>
+							</dict>
+							<key>end</key>
+							<string>(?=")</string>
 							<key>patterns</key>
 							<array>
 								<dict>
-									<key>match</key>
-									<string>\\[\\"]</string>
-									<key>name</key>
-									<string>constant.character.escape.po</string>
+									<key>include</key>
+									<string>#string-contents</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#semicolon-separators</string>
 								</dict>
 							</array>
 						</dict>
 					</array>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>^(msgstr)(?:(\[)(\d+)(\]))?\s+</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgstr.po</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgstr.po</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>constant.numeric.po</string>
-						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgstr.po</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>^(?!")</string>
-					<key>name</key>
-					<string>meta.scope.msgstr.po</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>(\G|^)"</string>
-							<key>end</key>
-							<string>"</string>
-							<key>name</key>
-							<string>string.quoted.double.po</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>match</key>
-									<string>\\[\\"]</string>
-									<key>name</key>
-									<string>constant.character.escape.po</string>
-								</dict>
-							</array>
-						</dict>
-					</array>
+					<key>include</key>
+					<string>#keywords</string>
 				</dict>
 				<dict>
-					<key>begin</key>
-					<string>^(msgctxt)(?:(\[)(\d+)(\]))?\s+</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgctxt.po</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgctxt.po</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>constant.numeric.po</string>
-						</dict>
-						<key>4</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.msgctxt.po</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>^(?!")</string>
+					<key>include</key>
+					<string>#strings</string>
+				</dict>
+			</array>
+		</dict>
+		<key>keywords</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\bmsgid(?:_plural)?\b</string>
 					<key>name</key>
-					<string>meta.scope.msgctxt.po</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>begin</key>
-							<string>(\G|^)"</string>
-							<key>end</key>
-							<string>"</string>
-							<key>name</key>
-							<string>string.quoted.double.po</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>match</key>
-									<string>\\[\\"]</string>
-									<key>name</key>
-									<string>constant.character.escape.po</string>
-								</dict>
-							</array>
-						</dict>
-					</array>
+					<string>keyword.control.msgid.po</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -219,142 +221,299 @@ Create meta scope for each entry
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.po</string>
+							<string>meta.brackets.po</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.begin.po</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>meta.number.integer.decimal.po constant.numeric.value.po</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.end.po</string>
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^(#~).*$\n?</string>
+					<string>\bmsgstr\b((\[)(\d*)(\]))?</string>
 					<key>name</key>
-					<string>comment.line.number-sign.obsolete.po</string>
+					<string>keyword.control.msgstr.po</string>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>comment</key>
-					<string>a line that does not begin with # or ". Could improve this regexp</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.brackets.po</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.begin.po</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>meta.number.integer.decimal.po constant.numeric.value.po</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.brackets.end.po</string>
+						</dict>
+					</dict>
 					<key>match</key>
-					<string>^(?!\s*$)[^#"].*$\n?</string>
+					<string>\bmsgctxt\b((\[)(\d*)(\]))?</string>
 					<key>name</key>
-					<string>invalid.illegal.po</string>
+					<string>keyword.control.msgctxt.po</string>
 				</dict>
 			</array>
 		</dict>
-		<key>comments</key>
+		<key>line-comments</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-sourceref</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-flag</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-normal</string>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-flag</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>^(?=#)</string>
+					<string>#[,=]</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
 					<key>end</key>
-					<string>(?!\G)</string>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
-							<key>begin</key>
-							<string>(#,)\s+</string>
-							<key>beginCaptures</key>
+							<key>include</key>
+							<string>#flags</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comma-separators</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-keyword</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>#[|~]</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.po</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#keywords</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-normal</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>#\.?</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.po</string>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-sourceref</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>#:</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.po</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>captures</key>
 							<dict>
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>punctuation.definition.comment.po</string>
+									<string>punctuation.separator.sequence.po</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>meta.number.integer.decimal.po constant.numeric.value.po</string>
 								</dict>
 							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.number-sign.flag.po</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>captures</key>
-									<dict>
-										<key>1</key>
-										<dict>
-											<key>name</key>
-											<string>entity.name.type.flag.po</string>
-										</dict>
-									</dict>
-									<key>match</key>
-									<string>(?:\G|,\s*)((?:fuzzy)|(?:no-)?(?:c|objc|sh|lisp|elisp|librep|scheme|smalltalk|java|csharp|awk|object-pascal|ycp|tcl|perl|perl-brace|php|gcc-internal|qt|boost)-format)</string>
-								</dict>
-							</array>
+							<key>match</key>
+							<string>(:)(\d+)(?=\s)</string>
 						</dict>
 						<dict>
-							<key>begin</key>
-							<string>#\.</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.po</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.number-sign.extracted.po</string>
+							<key>include</key>
+							<string>#semicolon-separators</string>
 						</dict>
 						<dict>
-							<key>begin</key>
-							<string>(#:)[ \t]*</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.po</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.number-sign.reference.po</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>match</key>
-									<string>(\S+:)([\d;]*)</string>
-									<key>name</key>
-									<string>storage.type.class.po</string>
-								</dict>
-							</array>
+							<key>include</key>
+							<string>#strings</string>
 						</dict>
 						<dict>
-							<key>begin</key>
-							<string>#\|</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.po</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
-							<key>name</key>
-							<string>comment.line.number-sign.previous.po</string>
+							<key>include</key>
+							<string>#paths</string>
 						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>paths</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?=\S)</string>
+					<key>end</key>
+					<string>(?=[:\s])</string>
+					<key>name</key>
+					<string>entity.name.path.po</string>
+					<key>patterns</key>
+					<array>
 						<dict>
-							<key>begin</key>
-							<string>#</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.po</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>\n</string>
+							<key>match</key>
+							<string>/</string>
 							<key>name</key>
-							<string>comment.line.number-sign.po</string>
+							<string>punctuation.separator.sequence.po</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>semicolon-separators</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>;</string>
+					<key>name</key>
+					<string>punctuation.separator.po</string>
+				</dict>
+			</array>
+		</dict>
+		<key>string-contents</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\.</string>
+					<key>name</key>
+					<string>constant.character.escape.po</string>
+				</dict>
+			</array>
+		</dict>
+		<key>strings</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>"</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>"</string>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.po</string>
+						</dict>
+					</dict>
+					<key>name</key>
+					<string>meta.string.po string.quoted.double.po</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string-contents</string>
 						</dict>
 					</array>
 				</dict>
