@@ -93,11 +93,17 @@ msgstr ""
 #                       ^^^^^^^^^^^^ entity.name.path.po
 #                                   ^ punctuation.separator.sequence.po
 #                                    ^^^ constant.numeric.value.po
-    #, c-format
-#^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^ comment.line.number-sign.flag.po
+    #, c-format, range: 0..10
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
 #   ^^ punctuation.definition.comment.begin.po
 #      ^^^^^^^^ variable.annotation.po
+#              ^ punctuation.separator.po
+#                ^^^^^ variable.annotation.po
+#                     ^ punctuation.separator.key-value.po
+#                       ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                        ^^ keyword.operator.range.po
+#                          ^^ meta.number.integer.decimal.po constant.numeric.value.po
     msgid "found %d fatal error"
     msgid_plural "found %d fatal errors"
     msgstr[0] "s'ha trobat %d error fatal"

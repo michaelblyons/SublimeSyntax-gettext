@@ -196,7 +196,18 @@ contexts:
       scope: variable.annotation.po
     - match: \bno-wrap\b
       scope: variable.annotation.po
+    - match: \b(range)\b(:?)
+      captures:
+        1: variable.annotation.po
+        2: punctuation.separator.key-value.po
+      push: range-body
     - include: comma-separators
+
+  range-body:
+    - include: integers
+    - match: \.\.
+      scope: keyword.operator.range.po
+    - include: else-pop
 
   paths:
     - match: (?=\S)
@@ -208,6 +219,10 @@ contexts:
       pop: true
     - match: /
       scope: punctuation.separator.sequence.po
+
+  integers:
+    - match: \d+
+      scope: meta.number.integer.decimal.po constant.numeric.value.po
 
 ###[ PROTOTYPE ]###############################################################
 
