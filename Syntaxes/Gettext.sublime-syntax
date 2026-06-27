@@ -1,131 +1,186 @@
 %YAML 1.2
 ---
-# http://www.sublimetext.com/docs/3/syntax.html
-name: Gettext
-comment: |
-  TODO:  Command for copy original to untranslated, label as fuzzy, remove fuzzy, next fuzzy etc
-  Create meta scope for each entry
+# https://www.sublimetext.com/docs/syntax.html
+# https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html
+name: gettext Portable Object (PO)
+scope: source.po
+
 file_extensions:
   - po
   - pot
   - potx
-scope: source.po
+
+# TODO: Command for copy original to untranslated, label as fuzzy,
+#       remove fuzzy, next fuzzy, etc
+
 contexts:
   main:
-    - match: '^(?=(msgid(_plural)?|msgctxt)\s*"[^"])|^\s*$'
-      comment: Start of body of document, after header
+    # Find indicators that the header has ended...
+    - match: (?=#[:,|~=.]|msg(?:id|str)(?!\s+""))
       push:
-        - match: \z
+        - match: \b\B
           pop: true
         - include: body
-    - include: comments
-    - match: ^msg(id|str)\s+""\s*$\n?
-      scope: comment.line.number-sign.po
-    - match: '^"(?:([^\s:]+)(:)\s+)?([^"]*)"\s*$\n?'
-      scope: meta.header.po
-      captures:
-        1: constant.language.po
-        2: punctuation.separator.key-value.po
-        3: string.other.po
+    # ...Otherwise, you're in the header.
+    - include: header
+
+  header:
+    - include: line-comments-normal
+    - match: ^"
+      scope: punctuation.definition.comment.begin.po
+      push:
+        - meta_scope: comment.block.documentation.po
+        - match: '"$\n'
+          scope: punctuation.definition.comment.end.po
+          pop: true
+        - include: string-contents
+        - match: \G([\w-]+)(:)
+          captures:
+            1: constant.language.po
+            2: punctuation.separator.key-value.po
+          push:
+            - match: (?=")
+              pop: true
+            - include: string-contents
+            - include: semicolon-separators
+    - include: keywords
+    - include: strings
+
   body:
-    - match: ^(msgid(_plural)?)\s+
-      captures:
-        1: keyword.control.msgid.po
+    - include: blocks
+
+  blocks:
+    - match: (?=\S)
       push:
-        - meta_scope: meta.scope.msgid.po
-        - match: ^(?!")
+        - meta_content_scope: meta.block.po
+        - match: ^\s*$\n?
+          scope: meta.fold.end.po
           pop: true
-        - match: (\G|^)"
-          push:
-            - meta_scope: string.quoted.double.po
-            - match: '"'
-              pop: true
-            - match: '\\[\\"]'
-              scope: constant.character.escape.po
-    - match: '^(msgstr)(?:(\[)(\d+)(\]))?\s+'
+        - include: line-comments
+        - include: keywords
+        - include: strings
+
+###[ KEYWORDS ]################################################################
+
+  keywords:
+    - match: \bmsgid(?:_plural)?\b
+      scope: keyword.control.msgid.po
+    - match: \bmsgstr\b
+      scope: keyword.control.msgstr.po
+      push: maybe-array
+    - match: \bmsgctxt\b
+      scope: keyword.control.msgctxt.po
+      push: maybe-array
+
+  maybe-array:
+    - match: (\[)(\d*)(\])
+      scope: meta.brackets.po
       captures:
-        1: keyword.control.msgstr.po
-        2: keyword.control.msgstr.po
-        3: constant.numeric.po
-        4: keyword.control.msgstr.po
-      push:
-        - meta_scope: meta.scope.msgstr.po
-        - match: ^(?!")
-          pop: true
-        - match: (\G|^)"
-          push:
-            - meta_scope: string.quoted.double.po
-            - match: '"'
-              pop: true
-            - match: '\\[\\"]'
-              scope: constant.character.escape.po
-    - match: '^(msgctxt)(?:(\[)(\d+)(\]))?\s+'
+        1: punctuation.section.brackets.begin.po
+        2: meta.number.integer.decimal.po constant.numeric.value.po
+        3: punctuation.section.brackets.end.po
+    - include: else-pop
+
+###[ COMMENTS ]################################################################
+
+  line-comments:
+    - include: line-comments-keyword
+    - include: line-comments-sourceref
+    - include: line-comments-flag
+    - include: line-comments-normal
+
+  line-comments-normal:
+    - match: '#\.?'
       captures:
-        1: keyword.control.msgctxt.po
-        2: keyword.control.msgctxt.po
-        3: constant.numeric.po
-        4: keyword.control.msgctxt.po
+        0: punctuation.definition.comment.begin.po
       push:
-        - meta_scope: meta.scope.msgctxt.po
-        - match: ^(?!")
-          pop: true
-        - match: (\G|^)"
-          push:
-            - meta_scope: string.quoted.double.po
-            - match: '"'
-              pop: true
-            - match: '\\[\\"]'
-              scope: constant.character.escape.po
-    - match: ^(#~).*$\n?
-      scope: comment.line.number-sign.obsolete.po
+        - meta_scope: comment.line.number-sign.po
+        - include: pop-eol
+
+  line-comments-flag:
+    - match: '#[,=]'
       captures:
-        1: punctuation.definition.comment.po
-    - include: comments
-    - match: '^(?!\s*$)[^#"].*$\n?'
-      comment: 'a line that does not begin with # or ". Could improve this regexp'
-      scope: invalid.illegal.po
-  comments:
-    - match: ^(?=#)
+        0: punctuation.definition.comment.begin.po
       push:
-        - match: (?!\G)
+        - meta_scope: comment.line.number-sign.po
+        - include: pop-eol
+        - include: flags
+        - include: comma-separators
+
+  line-comments-keyword:
+    - match: '#[|~]'
+      captures:
+        0: punctuation.definition.comment.begin.po
+      push:
+        - meta_scope: comment.line.number-sign.po
+        - include: pop-eol
+        - include: keywords
+
+  line-comments-sourceref:
+    - match: '#:'
+      captures:
+        0: punctuation.definition.comment.begin.po
+      push:
+        - meta_scope: comment.line.number-sign.po
+        - include: pop-eol
+        - match: (:)(\d+)(?=\s)
+          captures:
+            1: punctuation.separator.sequence.po
+            2: meta.number.integer.decimal.po constant.numeric.value.po
+        - include: semicolon-separators
+        - include: strings
+        - include: paths
+
+###[ ELEMENTS ]################################################################
+
+  strings:
+    - match: '"'
+      captures:
+        0: punctuation.definition.string.begin.po
+      push:
+        - meta_scope: meta.string.po string.quoted.double.po
+        - match: '"'
+          captures:
+            0: punctuation.definition.string.end.po
           pop: true
-        - match: (#,)\s+
-          captures:
-            1: punctuation.definition.comment.po
-          push:
-            - meta_scope: comment.line.number-sign.flag.po
-            - match: \n
-              pop: true
-            - match: (?:\G|,\s*)((?:fuzzy)|(?:no-)?(?:c|objc|sh|lisp|elisp|librep|scheme|smalltalk|java|csharp|awk|object-pascal|ycp|tcl|perl|perl-brace|php|gcc-internal|qt|boost)-format)
-              captures:
-                1: entity.name.type.flag.po
-        - match: '#\.'
-          captures:
-            0: punctuation.definition.comment.po
-          push:
-            - meta_scope: comment.line.number-sign.extracted.po
-            - match: \n
-              pop: true
-        - match: '(#:)[ \t]*'
-          captures:
-            1: punctuation.definition.comment.po
-          push:
-            - meta_scope: comment.line.number-sign.reference.po
-            - match: \n
-              pop: true
-            - match: '(\S+:)([\d;]*)'
-              scope: storage.type.class.po
-        - match: '#\|'
-          captures:
-            0: punctuation.definition.comment.po
-          push:
-            - meta_scope: comment.line.number-sign.previous.po
-            - match: \n
-              pop: true
-        - match: "#"
-          captures:
-            0: punctuation.definition.comment.po
-          push:
-            - meta_scope: comment.line.number-sign.po
-            - match: \n
-              pop: true
+        - include: string-contents
+
+  string-contents:
+    - match: \\.
+      scope: constant.character.escape.po
+
+  comma-separators:
+    - match: ','
+      scope: punctuation.separator.po
+
+  semicolon-separators:
+    - match: ;
+      scope: punctuation.separator.po
+
+  flags:
+    - match: \bfuzzy\b
+      scope: storage.modifier.po
+    - match: \b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format
+      scope: variable.annotation.po
+    - match: \bno-wrap\b
+      scope: variable.annotation.po
+    - include: comma-separators
+
+  paths:
+    - match: (?=\S)
+      push:
+        - meta_scope: entity.name.path.po
+        - match: (?=[:\s])
+          pop: true
+        - match: /
+          scope: punctuation.separator.sequence.po
+
+###[ PROTOTYPE ]###############################################################
+
+  else-pop:
+    - match: (?=\S)
+      pop: true
+
+  pop-eol:
+    - match: $\n?
+      pop: true
