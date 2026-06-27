@@ -24,43 +24,58 @@ contexts:
     # ...Otherwise, you're in the header.
     - include: header
 
+###[ HEADER ]##################################################################
+
   header:
-    - include: line-comments-normal
-    - match: ^"
-      scope: punctuation.definition.comment.begin.po
-      push:
-        - meta_scope: comment.block.documentation.po
-        - match: '"$\n'
-          scope: punctuation.definition.comment.end.po
-          pop: true
-        - include: string-contents
-        - match: \G([\w-]+)(:)
-          captures:
-            1: constant.language.po
-            2: punctuation.separator.key-value.po
-          push:
-            - match: (?=")
-              pop: true
-            - include: string-contents
-            - include: semicolon-separators
+    - include: line-comments-translator
+    - include: doc-block-strings
     - include: keywords
     - include: strings
+
+  doc-block-strings:
+    - match: ^"
+      scope: punctuation.definition.comment.begin.po
+      push: doc-block-string-body
+
+  doc-block-string-body:
+    - meta_scope: comment.block.documentation.po
+    - match: '"$\n'
+      scope: punctuation.definition.comment.end.po
+      pop: true
+    - include: string-escapes
+    - match: \G([\w-]+)((:)\s*)
+      captures:
+        1: meta.mapping.key.po string.unquoted.po
+        2: meta.mapping.po
+        3: punctuation.separator.key-value.po
+      push: doc-block-kvp-value
+
+  doc-block-kvp-value:
+    - meta_content_scope: meta.mapping.value.po string.unquoted.po
+    - match: (?=\\n?")
+      pop: true
+    - include: string-escapes
+    - include: semicolon-separators
+    - match: =
+      scope: punctuation.separator.key-value.po
+
+###[ BODY ]####################################################################
 
   body:
     - include: blocks
 
   blocks:
     - match: (?=\S)
-      push:
-        - meta_content_scope: meta.block.po
-        - match: ^\s*$\n?
-          scope: meta.fold.end.po
-          pop: true
-        - include: line-comments
-        - include: keywords
-        - include: strings
+      push: block-body
 
-###[ KEYWORDS ]################################################################
+  block-body:
+    - meta_content_scope: meta.block.po
+    - match: ^\s*$\n?
+      scope: meta.fold.end.po
+      pop: true
+    - include: line-comments
+    - include: keywords
+    - include: strings
 
   keywords:
     - match: \bmsgid(?:_plural)?\b
@@ -87,65 +102,79 @@ contexts:
     - include: line-comments-keyword
     - include: line-comments-sourceref
     - include: line-comments-flag
-    - include: line-comments-normal
+    - include: line-comments-extracted
+    - include: line-comments-translator
 
-  line-comments-normal:
-    - match: '#\.?'
-      captures:
-        0: punctuation.definition.comment.begin.po
-      push:
-        - meta_scope: comment.line.number-sign.po
-        - include: pop-eol
+  line-comments-translator:
+    - match: '#'
+      scope: punctuation.definition.comment.begin.po
+      push: line-comments-translator-body
+
+  line-comments-translator-body:
+    - meta_scope: comment.line.number-sign.translator.po
+    - include: pop-eol
+
+  line-comments-extracted:
+    - match: '#\.'
+      scope: punctuation.definition.comment.begin.po
+      push: line-comments-extracted-body
+
+  line-comments-extracted-body:
+    - meta_scope: comment.line.number-sign.extracted.po
+    - include: pop-eol
 
   line-comments-flag:
     - match: '#[,=]'
-      captures:
-        0: punctuation.definition.comment.begin.po
-      push:
-        - meta_scope: comment.line.number-sign.po
-        - include: pop-eol
-        - include: flags
-        - include: comma-separators
+      scope: punctuation.definition.comment.begin.po
+      push: line-comments-flag-body
+
+  line-comments-flag-body:
+    - meta_scope: comment.line.number-sign.flag.po
+    - include: pop-eol
+    - include: flags
+    - include: comma-separators
 
   line-comments-keyword:
     - match: '#[|~]'
-      captures:
-        0: punctuation.definition.comment.begin.po
-      push:
-        - meta_scope: comment.line.number-sign.po
-        - include: pop-eol
-        - include: keywords
+      scope: punctuation.definition.comment.begin.po
+      push: line-comments-keyword-body
+
+  line-comments-keyword-body:
+    - meta_scope: comment.line.number-sign.previous.po
+    - include: pop-eol
+    - include: keywords
 
   line-comments-sourceref:
     - match: '#:'
+      scope: punctuation.definition.comment.begin.po
+      push: line-comments-sourceref-body
+
+  line-comments-sourceref-body:
+    - meta_scope: comment.line.number-sign.reference.po
+    - include: pop-eol
+    - match: (:)(\d+)(?=\s)
       captures:
-        0: punctuation.definition.comment.begin.po
-      push:
-        - meta_scope: comment.line.number-sign.po
-        - include: pop-eol
-        - match: (:)(\d+)(?=\s)
-          captures:
-            1: punctuation.separator.sequence.po
-            2: meta.number.integer.decimal.po constant.numeric.value.po
-        - include: semicolon-separators
-        - include: strings
-        - include: paths
+        1: punctuation.separator.sequence.po
+        2: meta.number.integer.decimal.po constant.numeric.value.po
+    - include: semicolon-separators
+    - include: strings
+    - include: paths
 
 ###[ ELEMENTS ]################################################################
 
   strings:
     - match: '"'
-      captures:
-        0: punctuation.definition.string.begin.po
-      push:
-        - meta_scope: meta.string.po string.quoted.double.po
-        - match: '"'
-          captures:
-            0: punctuation.definition.string.end.po
-          pop: true
-        - include: string-contents
+      scope: punctuation.definition.string.begin.po
+      push: string-body
 
-  string-contents:
+  string-body:
+    - meta_scope: meta.string.po string.quoted.double.po
+    - include: string-escapes
+    - match: '"'
+      scope: punctuation.definition.string.end.po
+      pop: true
+
+  string-escapes:
     - match: \\.
       scope: constant.character.escape.po
 
@@ -160,7 +189,7 @@ contexts:
   flags:
     - match: \bfuzzy\b
       scope: storage.modifier.po
-    - match: \b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format
+    - match: \b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format\b
       scope: variable.annotation.po
     - match: \bno-wrap\b
       scope: variable.annotation.po
@@ -168,12 +197,14 @@ contexts:
 
   paths:
     - match: (?=\S)
-      push:
-        - meta_scope: entity.name.path.po
-        - match: (?=[:\s])
-          pop: true
-        - match: /
-          scope: punctuation.separator.sequence.po
+      push: path-body
+
+  path-body:
+    - meta_scope: entity.name.path.po
+    - match: (?=[:\s])
+      pop: true
+    - match: /
+      scope: punctuation.separator.sequence.po
 
 ###[ PROTOTYPE ]###############################################################
 
