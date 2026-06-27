@@ -5,15 +5,15 @@
 	<key>name</key>
 	<string>Symbols</string>
 	<key>scope</key>
-	<string>keyword.control.msgid.po</string>
+	<string>meta.label.po</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
 		<integer>1</integer>
 		<key>symbolTransformation</key>
 		<string>
-      s/^msgid\s+"(.*)"\s*$/$1/g;
-	  s/^msgid_plural\s+"(.*)"\s*$/$1/g;</string>
+			s/"//g;
+		</string>
 	</dict>
 	<key>uuid</key>
 	<string>18BD097D-CDB4-431C-AE3F-52D96B452985</string>

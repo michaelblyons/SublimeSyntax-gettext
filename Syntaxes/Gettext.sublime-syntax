@@ -80,6 +80,7 @@ contexts:
   keywords:
     - match: \bmsgid(?:_plural)?\b
       scope: keyword.control.msgid.po
+      push: msgid-body
     - match: \bmsgstr\b
       scope: keyword.control.msgstr.po
       push: maybe-array
@@ -94,6 +95,11 @@ contexts:
         1: punctuation.section.brackets.begin.po
         2: meta.number.integer.decimal.po constant.numeric.value.po
         3: punctuation.section.brackets.end.po
+    - include: else-pop
+
+  msgid-body:
+    - meta_content_scope: meta.label.po
+    - include: strings
     - include: else-pop
 
 ###[ COMMENTS ]################################################################
