@@ -82,93 +82,93 @@ msgstr ""
 
 
 #^ - meta.block
-    #  translator-comments
-#   ^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.translator.po
-#   ^ punctuation.definition.comment.begin.po
-    #. extracted-comments
-#   ^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.extracted.po
-#   ^ punctuation.definition.comment.begin.po
-    #: lib/error.c:116
-#^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
-#   ^^ punctuation.definition.comment.begin.po
-#      ^^^^^^^^^^^ entity.name.path.po
-#                 ^ punctuation.separator.sequence.po
-#                  ^^^ constant.numeric.value.po
-    #, fuzzy, perl-format
-#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
-#   ^^ punctuation.definition.comment.begin.po
-#      ^^^^^ storage.modifier.po
-#           ^ punctuation.separator.po
-#             ^^^^^^^^^^^ variable.annotation.po
-    #| msgid "Unknown foobar error"
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.previous.po
-#   ^^ punctuation.definition.comment.begin.po
-#      ^^^^^ keyword.control.msgid.po
-#            ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.po
-    msgctxt "a context identifier"
+#  translator-comments
+#^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.translator.po
+# <- punctuation.definition.comment.begin.po
+#. extracted-comments
+#^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.extracted.po
+# <- punctuation.definition.comment.begin.po
+#: lib/error.c:116
+#^^^^^^^^^^^^^^^^^^ meta.block.po
+#^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^^^^^^^ entity.name.path.po
+#             ^ punctuation.separator.sequence.po
+#              ^^^ constant.numeric.value.po
+#, fuzzy, perl-format
+#^^^^^^^^^^^^^^^^^^^^^ meta.block.po
+#^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^ storage.modifier.po
+#       ^ punctuation.separator.po
+#         ^^^^^^^^^^^ variable.annotation.po
+#| msgid "Unknown foobar error"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.previous.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^ keyword.control.msgid.po
+#        ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.po
+msgctxt "a context identifier"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^ keyword.control.msgctxt.po
-#           ^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
-#           ^ punctuation.definition.string.begin.po
-#                                ^ punctuation.definition.string.end.po
-    msgid "Unknown system error"
+#^^^^^^ keyword.control.msgctxt.po
+#       ^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#       ^ punctuation.definition.string.begin.po
+#                            ^ punctuation.definition.string.end.po
+msgid "Unknown system error"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^ keyword.control.msgid.po
-#        ^^^^^^^^^^^^^^^^^^^^^^^^ meta.label.po
-#         ^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
-#         ^ punctuation.definition.string.begin.po
-#                              ^ punctuation.definition.string.end.po
-    msgstr "Error desconegut del sistema"
+#^^^^ keyword.control.msgid.po
+#    ^^^^^^^^^^^^^^^^^^^^^^^^ meta.label.po
+#     ^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#     ^ punctuation.definition.string.begin.po
+#                          ^ punctuation.definition.string.end.po
+msgstr "Error desconegut del sistema"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^ keyword.control.msgstr.po
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
-#          ^ punctuation.definition.string.begin.po
-#                                       ^ punctuation.definition.string.end.po
+#^^^^^ keyword.control.msgstr.po
+#      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#      ^ punctuation.definition.string.begin.po
+#                                   ^ punctuation.definition.string.end.po
 
 # <- meta.fold.end - meta.block
-    #: src/msgcmp.c:338 src/po-lex.c:699
+#: src/msgcmp.c:338 src/po-lex.c:699
 #^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
-#   ^^ punctuation.definition.comment.begin.po
-#      ^^^^^^^^^^^^ entity.name.path.po
-#                  ^ punctuation.separator.sequence.po
-#                   ^^^ constant.numeric.value.po
-#                       ^^^^^^^^^^^^ entity.name.path.po
-#                                   ^ punctuation.separator.sequence.po
-#                                    ^^^ constant.numeric.value.po
-    #, c-format, range: 0..10
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
-#   ^^ punctuation.definition.comment.begin.po
-#      ^^^^^^^^ variable.annotation.po
-#              ^ punctuation.separator.po
-#                ^^^^^ variable.annotation.po
-#                     ^ punctuation.separator.key-value.po
-#                       ^ meta.number.integer.decimal.po constant.numeric.value.po
-#                        ^^ keyword.operator.range.po
-#                          ^^ meta.number.integer.decimal.po constant.numeric.value.po
-    msgid "found %d fatal error"
-    msgid_plural "found %d fatal errors"
-    msgstr[0] "s'ha trobat %d error fatal"
-    msgstr[1] "s'han trobat %d errors fatals"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^^^^^^^^ entity.name.path.po
+#              ^ punctuation.separator.sequence.po
+#               ^^^ constant.numeric.value.po
+#                   ^^^^^^^^^^^^ entity.name.path.po
+#                               ^ punctuation.separator.sequence.po
+#                                ^^^ constant.numeric.value.po
+#, c-format, range: 0..10
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^^^^ variable.annotation.po
+#          ^ punctuation.separator.po
+#            ^^^^^ variable.annotation.po
+#                 ^ punctuation.separator.key-value.po
+#                   ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                    ^^ keyword.operator.range.po
+#                      ^^ meta.number.integer.decimal.po constant.numeric.value.po
+msgid "found %d fatal error"
+msgid_plural "found %d fatal errors"
+msgstr[0] "s'ha trobat %d error fatal"
+msgstr[1] "s'han trobat %d errors fatals"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#   ^^^^^^ keyword.control.msgstr.po
-#         ^^^ meta.brackets.po
-#         ^ punctuation.section.brackets.begin.po
-#          ^ meta.number.integer.decimal.po constant.numeric.value.po
-#           ^ punctuation.section.brackets.end.po
-#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
-#             ^ punctuation.definition.string.begin.po
-#                                           ^ punctuation.definition.string.end.po
+#^^^^^ keyword.control.msgstr.po
+#     ^^^ meta.brackets.po
+#     ^ punctuation.section.brackets.begin.po
+#      ^ meta.number.integer.decimal.po constant.numeric.value.po
+#       ^ punctuation.section.brackets.end.po
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#         ^ punctuation.definition.string.begin.po
+#                                       ^ punctuation.definition.string.end.po
 
-    msgid ""
-    "Here is an example of how one might continue a very long string\n"
-    "for the common case the string represents multi-line output.\n"
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po meta.label.po
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
-#   ^ punctuation.definition.string.begin.po
-#                                                                ^^ constant.character.escape.po
-#                                                                  ^ punctuation.definition.string.end.po
+msgid ""
+"Here is an example of how one might continue a very long string\n"
+"for the common case the string represents multi-line output.\n"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po meta.label.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+# <- punctuation.definition.string.begin.po
+#                                                            ^^ constant.character.escape.po
+#                                                              ^ punctuation.definition.string.end.po
