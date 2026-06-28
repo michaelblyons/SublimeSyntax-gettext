@@ -26,13 +26,59 @@ msgstr ""
 #            ^^ meta.mapping.po
 #            ^ punctuation.separator.key-value.po
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.po string.unquoted.po
-#                      ^ punctuation.separator.key-value.po
+#              ^^^^^^^^ meta.mapping.key.po
+#                      ^ meta.mapping.po punctuation.separator.key-value.po
+#                       ^ meta.mapping.value.po meta.number.integer.decimal.po constant.numeric.value.po
 #                        ^ punctuation.separator.po
-#                                ^ punctuation.separator.key-value.po
-#                                     ^ punctuation.separator.key-value.po
+#                          ^^^^^^ meta.mapping.key.po
+#                                ^ meta.mapping.po punctuation.separator.key-value.po
+#                                 ^^^^^^^^ meta.group.po
+#                                 ^ punctuation.section.group.begin.po
+#                                  ^ variable.language.po
+#                                    ^^ keyword.operator.comparison.po
+#                                       ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                        ^ punctuation.section.group.end.po
 #                                         ^ punctuation.separator.po
 #                                          ^^ constant.character.escape.po
 #                                            ^^ punctuation.definition.comment.end.po
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.documentation.po
+#^^^^^^^^^^^^ meta.mapping.key.po string.unquoted.po
+#            ^^ meta.mapping.po
+#            ^ punctuation.separator.key-value.po
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.po string.unquoted.po
+#              ^^^^^^^^ meta.mapping.key.po
+#                      ^ meta.mapping.po punctuation.separator.key-value.po
+#                       ^ meta.mapping.value.po meta.number.integer.decimal.po constant.numeric.value.po
+#                        ^ punctuation.separator.po
+#                          ^^^^^^ meta.mapping.key.po
+#                                ^ meta.mapping.po punctuation.separator.key-value.po
+#                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.po
+#                                 ^ punctuation.section.group.begin.po
+#                                  ^ variable.language.po
+#                                   ^^ keyword.operator.comparison.po
+#                                     ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                       ^ keyword.operator.ternary.po
+#                                         ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                           ^ keyword.operator.ternary.po
+#                                             ^^^^^^^^^^^^^^^^^^^^ meta.group.po
+#                                             ^ punctuation.section.group.begin.po
+#                                              ^ variable.language.po
+#                                               ^ keyword.operator.arithmetic.po
+#                                                ^^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                                  ^^ keyword.operator.comparison.po
+#                                                    ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                                      ^^ keyword.operator.boolean.po
+#                                                         ^ variable.language.po
+#                                                          ^ keyword.operator.arithmetic.po
+#                                                           ^^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                                             ^^ keyword.operator.comparison.po
+#                                                               ^ meta.number.integer.decimal.po constant.numeric.value.po
+#                                                                ^ punctuation.section.group.end.po
+#                                                                  ^^ keyword.operator.boolean.po
+#                                                                                                                                                                                            ^^ constant.character.escape.po
+#                                                                                                                                                                                              ^^ punctuation.definition.comment.end.po
 
 
 #^ - meta.block

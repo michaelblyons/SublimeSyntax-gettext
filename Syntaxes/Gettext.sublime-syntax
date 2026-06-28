@@ -40,14 +40,62 @@ contexts:
       scope: punctuation.definition.comment.end.po
       pop: true
     - include: string-escapes
+    - include: doc-block-kvp-plural-forms
+    - include: doc-block-kvp-generic
+
+  doc-block-kvp-generic:
     - match: \G([\w-]+)((:)\s*)
       captures:
         1: meta.mapping.key.po string.unquoted.po
         2: meta.mapping.po
         3: punctuation.separator.key-value.po
-      push: doc-block-kvp-value
+      push: doc-block-kvp-generic-value
 
-  doc-block-kvp-value:
+  doc-block-kvp-plural-forms:
+    - match: \G(Plural-Forms)((:)\s*)
+      captures:
+        1: meta.mapping.key.po string.unquoted.po
+        2: meta.mapping.po
+        3: punctuation.separator.key-value.po
+      push: doc-block-kvp-generic-value
+      with_prototype:
+        - match: (nplurals)(=)(\d+)
+          captures:
+            1: meta.mapping.key.po
+            2: meta.mapping.po punctuation.separator.key-value.po
+            3: meta.mapping.value.po meta.number.integer.decimal.po constant.numeric.value.po
+        - match: \b(plural)(=)
+          captures:
+            1: meta.mapping.key.po
+            2: meta.mapping.po punctuation.separator.key-value.po
+          push: plural-minilanguage
+
+  plural-minilanguage:
+    - match: (?=;|\\n?")
+      pop: true
+    - match: \bn\b
+      scope: variable.language.po
+    - match: \(
+      scope: punctuation.section.group.begin.po
+      push: plural-minilanguage-group-body
+    - match: \|\||&&
+      scope: keyword.operator.boolean.po
+    - match: '%'
+      scope: keyword.operator.arithmetic.po
+    - match: '[=!><]=|>|<'
+      scope: keyword.operator.comparison.po
+    - match: '[?:]'
+      scope: keyword.operator.ternary.po
+    - include: integers
+
+  plural-minilanguage-group-body:
+    - meta_scope: meta.group.po
+    - match: \)
+      scope: punctuation.section.group.end.po
+      pop: true
+    - include: plural-minilanguage
+
+  doc-block-kvp-generic-value:
     - meta_content_scope: meta.mapping.value.po string.unquoted.po
     - match: (?=\\n?")
       pop: true
