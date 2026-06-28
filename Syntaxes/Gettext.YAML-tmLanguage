@@ -16,10 +16,18 @@ patterns:
   - include: '#header'
 
 repository:
+
+###[ HEADER ]##################################################################
+
   header:
     patterns:
-      - include: '#line-comments-normal'
+      - include: '#line-comments-translator'
+      - include: '#doc-block-strings'
+      - include: '#keywords'
+      - include: '#strings'
 
+  doc-block-strings:
+    patterns:
       - begin: ^"
         beginCaptures:
           '0': {name: punctuation.definition.comment.begin.po}
@@ -28,18 +36,25 @@ repository:
           '0': {name: punctuation.definition.comment.end.po}
         name: comment.block.documentation.po
         patterns:
-          - include: '#string-contents'
-          - begin: \G([\w-]+)(:)
-            beginCaptures:
-              '1': {name: constant.language.po}
-              '2': {name: punctuation.separator.key-value.po}
-            end: (?=")
-            patterns:
-              - include: '#string-contents'
-              - include: '#semicolon-separators'
+          - include: '#doc-block-kvp-generic'
+          - include: '#string-escapes'
 
-      - include: '#keywords'
-      - include: '#strings'
+  doc-block-kvp-generic:
+    patterns:
+      - begin: \G([\w-]+)((:)\s*)
+        beginCaptures:
+          '1': {name: meta.mapping.key.po string.unquoted.po}
+          '2': {name: meta.mapping.po}
+          '3': {name: punctuation.separator.key-value.po}
+        end: (?=\\n?")
+        contentName: meta.mapping.value.po string.unquoted.po
+        patterns:
+          - include: '#string-escapes'
+          - include: '#semicolon-separators'
+          - match: '='
+            name: punctuation.separator.key-value.po
+
+###[ BODY ]####################################################################
 
   body:
     patterns:
@@ -59,8 +74,13 @@ repository:
 
   keywords:
     patterns:
-      - name: keyword.control.msgid.po
-        match: \bmsgid(?:_plural)?\b
+      - begin: \bmsgid(?:_plural)?\b
+        beginCaptures:
+          '0': {name: keyword.control.msgid.po}
+        end: (?![\s"])
+        contentName: meta.label.po
+        patterns:
+          - include: '#strings'
       - name: keyword.control.msgstr.po
         match: \bmsgstr\b((\[)(\d*)(\]))?
         captures:
@@ -76,24 +96,35 @@ repository:
           '3': {name: meta.number.integer.decimal.po constant.numeric.value.po}
           '4': {name: punctuation.section.brackets.end.po}
 
+###[ COMMENTS ]################################################################
+
   line-comments:
     patterns:
       - include: '#line-comments-keyword'
       - include: '#line-comments-sourceref'
       - include: '#line-comments-flag'
-      - include: '#line-comments-normal'
+      - include: '#line-comments-extracted'
+      - include: '#line-comments-translator'
 
-  line-comments-normal:
+  line-comments-translator:
     patterns:
-      - name: comment.line.number-sign.po
-        begin: '#\.?'
+      - name: comment.line.number-sign.translator.po
+        begin: '#'
+        end: $\n?
+        beginCaptures:
+          '0': {name: punctuation.definition.comment.begin.po}
+
+  line-comments-extracted:
+    patterns:
+      - name: comment.line.number-sign.extracted.po
+        begin: '#\.'
         end: $\n?
         beginCaptures:
           '0': {name: punctuation.definition.comment.begin.po}
 
   line-comments-flag:
     patterns:
-      - name: comment.line.number-sign.po
+      - name: comment.line.number-sign.flag.po
         begin: '#[,=]'
         end: $\n?
         beginCaptures:
@@ -104,7 +135,7 @@ repository:
 
   line-comments-sourceref:
     patterns:
-      - name: comment.line.number-sign.po
+      - name: comment.line.number-sign.reference.po
         begin: '#:'
         end: $\n?
         beginCaptures:
@@ -120,13 +151,15 @@ repository:
 
   line-comments-keyword:
     patterns:
-      - name: comment.line.number-sign.po
+      - name: comment.line.number-sign.previous.po
         begin: '#[|~]'
         end: $\n?
         beginCaptures:
           '0': {name: punctuation.definition.comment.begin.po}
         patterns:
           - include: '#keywords'
+
+###[ ELEMENTS ]################################################################
 
   strings:
     patterns:
@@ -138,9 +171,9 @@ repository:
         endCaptures:
           '0': {name: punctuation.definition.string.end.po}
         patterns:
-          - include: '#string-contents'
+          - include: '#string-escapes'
 
-  string-contents:
+  string-escapes:
     patterns:
       - name: constant.character.escape.po
         match: \\.
@@ -150,9 +183,16 @@ repository:
       - name: storage.modifier.po
         match: \bfuzzy\b
       - name: variable.annotation.po
-        match: \b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format
+        match: \b(?:no-)?(?:[a-z]+|object-pascal|c\+\+|modula2)(?:-brace|-internal|-plural|-printf)?-format
       - name: variable.annotation.po
         match: \bno-wrap\b
+      - begin: \b(range)\b(:?)
+        beginCaptures:
+          '1': {name: variable.annotation.po}
+          '2': {name: punctuation.separator.key-value.po}
+        end: (?![\s\d.])
+        patterns:
+          - include: '#integers'
       - include: '#comma-separators'
 
   comma-separators:
@@ -173,3 +213,8 @@ repository:
         patterns:
           - name: punctuation.separator.sequence.po
             match: /
+
+  integers:
+    patterns:
+      - match: \d+
+        name: meta.number.integer.decimal.po constant.numeric.value.po

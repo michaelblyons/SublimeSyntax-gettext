@@ -95,42 +95,59 @@
 				</dict>
 			</array>
 		</dict>
-		<key>flags</key>
+		<key>doc-block-kvp-generic</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>\bfuzzy\b</string>
-					<key>name</key>
-					<string>storage.modifier.po</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format</string>
-					<key>name</key>
-					<string>variable.annotation.po</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>\bno-wrap\b</string>
-					<key>name</key>
-					<string>variable.annotation.po</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comma-separators</string>
+					<key>begin</key>
+					<string>\G([\w-]+)((:)\s*)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>meta.mapping.key.po string.unquoted.po</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>meta.mapping.po</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.po</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.mapping.value.po string.unquoted.po</string>
+					<key>end</key>
+					<string>(?=\\n?")</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string-escapes</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#semicolon-separators</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>=</string>
+							<key>name</key>
+							<string>punctuation.separator.key-value.po</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
-		<key>header</key>
+		<key>doc-block-strings</key>
 		<dict>
 			<key>patterns</key>
 			<array>
-				<dict>
-					<key>include</key>
-					<string>#line-comments-normal</string>
-				</dict>
 				<dict>
 					<key>begin</key>
 					<string>^"</string>
@@ -158,39 +175,81 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#string-contents</string>
+							<string>#doc-block-kvp-generic</string>
 						</dict>
 						<dict>
-							<key>begin</key>
-							<string>\G([\w-]+)(:)</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>1</key>
-								<dict>
-									<key>name</key>
-									<string>constant.language.po</string>
-								</dict>
-								<key>2</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.separator.key-value.po</string>
-								</dict>
-							</dict>
-							<key>end</key>
-							<string>(?=")</string>
-							<key>patterns</key>
-							<array>
-								<dict>
-									<key>include</key>
-									<string>#string-contents</string>
-								</dict>
-								<dict>
-									<key>include</key>
-									<string>#semicolon-separators</string>
-								</dict>
-							</array>
+							<key>include</key>
+							<string>#string-escapes</string>
 						</dict>
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>flags</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\bfuzzy\b</string>
+					<key>name</key>
+					<string>storage.modifier.po</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b(?:no-)?(?:[a-z]+|object-pascal|c\+\+|modula2)(?:-brace|-internal|-plural|-printf)?-format</string>
+					<key>name</key>
+					<string>variable.annotation.po</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\bno-wrap\b</string>
+					<key>name</key>
+					<string>variable.annotation.po</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\b(range)\b(:?)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.annotation.po</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>(?![\s\d.])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#integers</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comma-separators</string>
+				</dict>
+			</array>
+		</dict>
+		<key>header</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-translator</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#doc-block-strings</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -202,15 +261,44 @@
 				</dict>
 			</array>
 		</dict>
-		<key>keywords</key>
+		<key>integers</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
-					<string>\bmsgid(?:_plural)?\b</string>
+					<string>\d+</string>
 					<key>name</key>
-					<string>keyword.control.msgid.po</string>
+					<string>meta.number.integer.decimal.po constant.numeric.value.po</string>
+				</dict>
+			</array>
+		</dict>
+		<key>keywords</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\bmsgid(?:_plural)?\b</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.msgid.po</string>
+						</dict>
+					</dict>
+					<key>contentName</key>
+					<string>meta.label.po</string>
+					<key>end</key>
+					<string>(?![\s"])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#strings</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -290,7 +378,33 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#line-comments-normal</string>
+					<string>#line-comments-extracted</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line-comments-translator</string>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-extracted</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>#\.</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.extracted.po</string>
 				</dict>
 			</array>
 		</dict>
@@ -312,7 +426,7 @@
 					<key>end</key>
 					<string>$\n?</string>
 					<key>name</key>
-					<string>comment.line.number-sign.po</string>
+					<string>comment.line.number-sign.flag.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -345,7 +459,7 @@
 					<key>end</key>
 					<string>$\n?</string>
 					<key>name</key>
-					<string>comment.line.number-sign.po</string>
+					<string>comment.line.number-sign.previous.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -353,28 +467,6 @@
 							<string>#keywords</string>
 						</dict>
 					</array>
-				</dict>
-			</array>
-		</dict>
-		<key>line-comments-normal</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>begin</key>
-					<string>#\.?</string>
-					<key>beginCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.comment.begin.po</string>
-						</dict>
-					</dict>
-					<key>end</key>
-					<string>$\n?</string>
-					<key>name</key>
-					<string>comment.line.number-sign.po</string>
 				</dict>
 			</array>
 		</dict>
@@ -396,7 +488,7 @@
 					<key>end</key>
 					<string>$\n?</string>
 					<key>name</key>
-					<string>comment.line.number-sign.po</string>
+					<string>comment.line.number-sign.reference.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -429,6 +521,28 @@
 							<string>#paths</string>
 						</dict>
 					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>line-comments-translator</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>#</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.po</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>$\n?</string>
+					<key>name</key>
+					<string>comment.line.number-sign.translator.po</string>
 				</dict>
 			</array>
 		</dict>
@@ -467,7 +581,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>string-contents</key>
+		<key>string-escapes</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -510,7 +624,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#string-contents</string>
+							<string>#string-escapes</string>
 						</dict>
 					</array>
 				</dict>
