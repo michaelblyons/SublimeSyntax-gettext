@@ -1,0 +1,92 @@
+# SYNTAX TEST "Packages/Gettext/Syntaxes/Gettext.sublime-syntax"
+
+# https://www.gnu.org/software/gettext/manual/html_node/Sticky-flags.html
+
+#, c-format
+#  ^^^^^^^^ variable.annotation.po
+msgid "String `%s' has %d characters"
+msgstr "%2$d Zeichen lang ist die Zeichenkette `%1$s'"
+
+#, objc-format
+#  ^^^^^^^^^^^ variable.annotation.po
+msgid "%@ in addition to c-format"
+msgstr "%@"
+
+#, c++-format
+#  ^^^^^^^^^^ variable.annotation.po
+msgid "Hello {}! Escaped braces look like {{this}}."
+msgstr "To {0} or not to {0:#}, that is {1:#}."
+
+#, python-format
+#  ^^^^^^^^^^^^^ variable.annotation.po
+msgid "%(language)s has %(number)03d quote types."
+msgstr ""
+
+#, python-brace-format
+#  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
+msgid "My name is {0} :-{{}}"
+msgstr "My name is {0[name]}"
+msgstr "{0:{1}} {0:8} {0.name}"
+
+#, java-format
+#  ^^^^^^^^^^^ variable.annotation.po
+#, java-printf-format
+#  ^^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, csharp-format
+#  ^^^^^^^^^^^^^ variable.annotation.po
+#, javascript-format
+#  ^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, scheme-format
+#  ^^^^^^^^^^^^^ variable.annotation.po
+#, lisp-format
+#  ^^^^^^^^^^^ variable.annotation.po
+#, elisp-format
+#  ^^^^^^^^^^^^ variable.annotation.po
+#, librep-format
+#  ^^^^^^^^^^^^^ variable.annotation.po
+#, rust-format
+#  ^^^^^^^^^^^ variable.annotation.po
+#, go-format
+#  ^^^^^^^^^ variable.annotation.po
+#, ruby-format
+#  ^^^^^^^^^^^ variable.annotation.po
+#, sh-format
+#  ^^^^^^^^^ variable.annotation.po
+#, sh-printf-format
+#  ^^^^^^^^^^^^^^^^ variable.annotation.po
+#, awk-format
+#  ^^^^^^^^^^ variable.annotation.po
+#, lua-format
+#  ^^^^^^^^^^ variable.annotation.po
+#, object-pascal-format
+#  ^^^^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, modula2-format
+#  ^^^^^^^^^^^^^^ variable.annotation.po
+#, d-format
+#  ^^^^^^^^ variable.annotation.po
+#, ocaml-format
+#  ^^^^^^^^^^^^ variable.annotation.po
+#, smalltalk-format
+#  ^^^^^^^^^^^^^^^^ variable.annotation.po
+#, qt-format
+#  ^^^^^^^^^ variable.annotation.po
+#, qt-plural-format
+#  ^^^^^^^^^^^^^^^^ variable.annotation.po
+#, kde-format
+#  ^^^^^^^^^^ variable.annotation.po
+#, boost-format
+#  ^^^^^^^^^^^^ variable.annotation.po
+#, tcl-format
+#  ^^^^^^^^^^ variable.annotation.po
+#, perl-format
+#  ^^^^^^^^^^^ variable.annotation.po
+#, perl-brace-format
+#  ^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, php-format
+#  ^^^^^^^^^^ variable.annotation.po
+#, gcc-internal-format
+#  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, gfc-internal-format
+#  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
+#, ycp-format
+#  ^^^^^^^^^^ variable.annotation.po

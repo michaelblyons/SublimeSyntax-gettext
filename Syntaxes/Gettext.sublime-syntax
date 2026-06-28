@@ -240,7 +240,13 @@ contexts:
   flags:
     - match: \bfuzzy\b
       scope: storage.modifier.po
-    - match: \b(?:no-)?(?:[a-z]+|object-pascal)(?:-brace|-internal|-plural|-printf)?-format\b
+    - match: |-
+        \b(?x:
+          (?:no-)?
+          (?:[a-z]+|object-pascal|c\+\+|modula2)
+          (?:-brace|-internal|-plural|-printf)?
+          -format
+        )\b
       scope: variable.annotation.po
     - match: \bno-wrap\b
       scope: variable.annotation.po
