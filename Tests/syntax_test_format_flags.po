@@ -30,40 +30,130 @@ msgstr "{0:{1}} {0:8} {0.name}"
 
 #, java-format
 #  ^^^^^^^^^^^ variable.annotation.po
+msgid ""
+"Within a String, a pair of single quotes can be used to quote any "
+"arbitrary characters except single quotes. For example, pattern string "
+"'{0}' represents string {0}, not a FormatElement. A single quote itself must "
+"be represented by doubled single quotes '' throughout a String. For example, "
+"pattern string '{''}' is interpreted as a sequence of '{ (start of quoting "
+"and a left curly brace), '' (a single quote), and }' (a right curly brace "
+"and end of quoting), not '{' and '}' (quoted left and right curly braces): "
+"representing string {'}, not {}."
+msgstr ""
+"A SubformatPattern is interpreted by its corresponding subformat, and "
+"subformat-dependent pattern rules apply. For example, pattern string "
+"{1,number,$'#',##} (SubformatPattern with underline) will produce a number "
+"format with the pound-sign quoted, with a result such as: $#31,45. Refer to "
+"each Format subclass documentation for details.\n"
+"Any unmatched quote is treated as closed at the end of the given pattern. "
+"For example, pattern string '{0} is treated as pattern '{0}'.\n"
+"Any curly braces within an unquoted pattern must be balanced. For example, "
+"ab {0} de and ab '}' de are valid patterns, but ab {0'}' de, ab } de and "
+"''{'' are not. "
+
 #, java-printf-format
 #  ^^^^^^^^^^^^^^^^^^ variable.annotation.po
+msgid ""
+"%4$2s %3$2s %2$2s %1$2s"
+"e = %+10.4f"
+msgstr ""
+"Amount gained or lost since last statement: $ %(,.2f"
+
 #, csharp-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
+
 #, javascript-format
 #  ^^^^^^^^^^^^^^^^^ variable.annotation.po
+msgid "%% %c = character, %s = string, %j = JSON"
+msgstr "numbers: %b %d %o %x %X"
+
 #, scheme-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
+
 #, lisp-format
 #  ^^^^^^^^^^^ variable.annotation.po
+msgid ""
+"~S         ;This is an S directive with no parameters or modifiers.  "
+"~3,-4:@s   ;This is an S directive with two parameters, 3 and -4,    "
+"           ; and both the colon and at-sign flags.                   "
+"~,+4S      ;Here the first prefix parameter is omitted and takes     "
+"           ; on its default value, while the second parameter is 4.  "
+msgstr ""
+
 #, elisp-format
 #  ^^^^^^^^^^^^ variable.annotation.po
+
 #, librep-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
+msgid "The %2$s is %1$s!"
+msgstr ""
+
 #, rust-format
 #  ^^^^^^^^^^^ variable.annotation.po
+msgid "{} scored {score:.1}% in {}"
+msgstr "{:?}, {:#?}"
+
 #, go-format
 #  ^^^^^^^^^ variable.annotation.po
+msgid "%[2]d %[1]d\n"
+msgstr "%[3]*.[2]*[1]f"
+
 #, ruby-format
 #  ^^^^^^^^^^^ variable.annotation.po
+msgid "%n$"
+msgstr "%<name> %{name} %<name>s"
+
 #, sh-format
 #  ^^^^^^^^^ variable.annotation.po
+msgid "form $variable or ${variable}"
+msgstr ""
+"References of the form ${variable-default}, ${variable:-default}, "
+"${variable=default}, ${variable:=default}, ${variable+replacement}, "
+"${variable:+replacement}, ${variable?ignored}, ${variable:?ignored}, "
+"that would be valid inside shell scripts, are not supported."
+
 #, sh-printf-format
 #  ^^^^^^^^^^^^^^^^ variable.annotation.po
+msgid "%2d right\t%2d wrong\t(%s%%)\n"
+msgstr ""
+
 #, awk-format
 #  ^^^^^^^^^^ variable.annotation.po
+
 #, lua-format
 #  ^^^^^^^^^^ variable.annotation.po
+msgid "%q"
+msgstr ""
+
 #, object-pascal-format
 #  ^^^^^^^^^^^^^^^^^^^^ variable.annotation.po
+msgid ""
+msgstr ""
+"[%d]"
+"[%%]"
+"[%10d]"
+"[%.4d]"
+"[%10.4d]"
+"[%0:d]"
+"[%0:10d]"
+"[%0:10.4d]"
+"[%0:-10d]"
+"[%0:-10.4d]"
+"[%-*.*d]"
+
 #, modula2-format
 #  ^^^^^^^^^^^^^^ variable.annotation.po
+
 #, d-format
 #  ^^^^^^^^ variable.annotation.po
+msgid ""
+"I got %b %(%X%) for %f euros."
+"%(%(%d %) - %)"
+"[%(%(%d %) - %)]"
+"[%([%(%d %)]%| - %)]"
+"%g != %+#g"
+msgstr ""
+
 #, ocaml-format
 #  ^^^^^^^^^^^^ variable.annotation.po
 #, smalltalk-format
@@ -74,16 +164,31 @@ msgstr "{0:{1}} {0:8} {0.name}"
 #  ^^^^^^^^^^^^^^^^ variable.annotation.po
 #, kde-format
 #  ^^^^^^^^^^ variable.annotation.po
+
 #, boost-format
 #  ^^^^^^^^^^^^ variable.annotation.po
+msgid ""
+"a directive has either the same syntax as in a C format string, such as "
+"‘%1$+5d’, or may be surrounded by vertical bars, such as ‘%|1$+5d|’ or "
+"‘%|1$+5|’"
+msgstr ""
+
+
 #, tcl-format
 #  ^^^^^^^^^^ variable.annotation.po
 #, perl-format
 #  ^^^^^^^^^^^ variable.annotation.po
 #, perl-brace-format
 #  ^^^^^^^^^^^^^^^^^ variable.annotation.po
+
 #, php-format
 #  ^^^^^^^^^^ variable.annotation.po
+msgid ""
+"The %2$s contains %1$d monkeys."
+"That's a nice %2$s full of %1$d monkeys."
+msgstr ""
+
+
 #, gcc-internal-format
 #  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
 #, gfc-internal-format
