@@ -219,7 +219,7 @@ contexts:
     - include: strings
     - include: paths
 
-###[ ELEMENTS ]################################################################
+###[ STRINGS ]#################################################################
 
   strings:
     - match: '"'
@@ -233,10 +233,59 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.end.po
       pop: true
+    - include: string-placeholders
 
   string-escapes:
     - match: \\.
       scope: constant.character.escape.po
+
+  string-placeholders:
+    - include: string-placeholders-percent
+    - include: string-placeholders-dollar
+    - include: string-placeholders-brace
+
+  string-placeholders-percent:
+    - match: '%%'
+      scope: constant.character.escape.po
+    # Eat non-formatting percent symbols
+    - match: '%(?=["\s\\])'
+    - match: '%[-\w.:*$+|@]+'
+      scope: constant.other.placeholder.po
+    - match: '%\{(?=[^"\s]*\})'
+      push:
+        - meta_scope: constant.other.placeholder.po
+        - match: \}
+          pop: true
+    - match: '%\<(?=[^"\s]*\>)'
+      push:
+        - meta_scope: constant.other.placeholder.po
+        - match: \>\w*
+          pop: true
+    - match: '%\((?=[^"\s]*\))'
+      push:
+        - meta_scope: constant.other.placeholder.po
+        - match: \)\w*
+          pop: true
+
+  string-placeholders-dollar:
+    - match: \$\w+
+      scope: constant.other.placeholder.po
+    - match: \$\{\w+\}
+      scope: constant.other.placeholder.po
+    # Eat dollar-braces if not simple
+    - match: \$\{
+
+  string-placeholders-brace:
+    - match: \{\{|\}\}
+      scope: constant.character.escape.po
+    - match: \{(?=[^"\s]*\})
+      push:
+        - meta_scope: constant.other.placeholder.po
+        - match: \}
+          pop: true
+        - include: string-placeholders-brace
+
+###[ ELEMENTS ]################################################################
 
   comma-separators:
     - match: ','

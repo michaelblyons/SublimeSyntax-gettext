@@ -5,57 +5,87 @@
 #, c-format
 #  ^^^^^^^^ variable.annotation.po
 msgid "String `%s' has %d characters"
+#              ^^ constant.other.placeholder.po
+#                ^ - constant
+#                      ^^ constant.other.placeholder.po
 msgstr "%2$d Zeichen lang ist die Zeichenkette `%1$s'"
+#       ^^^^ constant.other.placeholder.po
+#                                               ^^^^ constant.other.placeholder.po
+#                                                   ^ - constant
 
 #, objc-format
 #  ^^^^^^^^^^^ variable.annotation.po
 msgid "%@ in addition to c-format"
-msgstr "%@"
+#      ^^ constant.other.placeholder.po
+msgstr ""
 
 #, c++-format
 #  ^^^^^^^^^^ variable.annotation.po
 msgid "Hello {}! Escaped braces look like {{this}}."
+#            ^^ constant.other.placeholder.po
+#              ^ - constant
+#                                         ^^ constant.character.escape.po
+#                                               ^^ constant.character.escape.po
 msgstr "To {0} or not to {0:#}, that is {1:#}."
+#          ^^^ constant.other.placeholder.po
+#                        ^^^^^ constant.other.placeholder.po
+#                                       ^^^^^ constant.other.placeholder.po
 
 #, python-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
 msgid "%(language)s has %(number)03d quote types."
+#      ^^^^^^^^^^^^ constant.other.placeholder.po
+#                       ^^^^^^^^^^^^ constant.other.placeholder.po
 msgstr ""
 
 #, python-brace-format
 #  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
 msgid "My name is {0} :-{{}}"
+#                 ^^^ constant.other.placeholder.po
+#                       ^^^^ constant.character.escape.po
 msgstr "My name is {0[name]}"
+#                  ^^^^^^^^^ constant.other.placeholder.po
 msgstr "{0:{1}} {0:8} {0.name}"
+#       ^^^^^^^ constant.other.placeholder.po
+#              ^ - constant
+#               ^^^^^ constant.other.placeholder.po
+#                    ^ - constant
+#                     ^^^^^^^^ constant.other.placeholder.po
 
 #, java-format
 #  ^^^^^^^^^^^ variable.annotation.po
 msgid ""
 "Within a String, a pair of single quotes can be used to quote any "
 "arbitrary characters except single quotes. For example, pattern string "
-"'{0}' represents string {0}, not a FormatElement. A single quote itself must "
-"be represented by doubled single quotes '' throughout a String. For example, "
-"pattern string '{''}' is interpreted as a sequence of '{ (start of quoting "
-"and a left curly brace), '' (a single quote), and }' (a right curly brace "
-"and end of quoting), not '{' and '}' (quoted left and right curly braces): "
-"representing string {'}, not {}."
+"‘'{0}'’ represents string ‘{0}’, not a FormatElement. A single quote itself "
+"must be represented by doubled single quotes '' throughout a String. For "
+"example, pattern string ‘'{''}'’ is interpreted as a sequence of '{ (start "
+"of quoting and a left curly brace), '' (a single quote), and }' (a right "
+"curly brace and end of quoting), not '{' and '}' (quoted left and right "
+"curly braces): representing string ‘{'}’, not ‘{}’."
 msgstr ""
 "A SubformatPattern is interpreted by its corresponding subformat, and "
 "subformat-dependent pattern rules apply. For example, pattern string "
 "{1,number,$'#',##} (SubformatPattern with underline) will produce a number "
-"format with the pound-sign quoted, with a result such as: $#31,45. Refer to "
-"each Format subclass documentation for details.\n"
+#^^^^^^^^^^^^^^^^^^ constant.other.placeholder.po
+"format with the pound-sign quoted, with a result such as: ‘$#31,45’. Refer "
+"to each Format subclass documentation for details.\n"
 "Any unmatched quote is treated as closed at the end of the given pattern. "
 "For example, pattern string '{0} is treated as pattern '{0}'.\n"
 "Any curly braces within an unquoted pattern must be balanced. For example, "
-"ab {0} de and ab '}' de are valid patterns, but ab {0'}' de, ab } de and "
-"''{'' are not. "
+"‘ab {0} de’ and ‘ab '}' de’ are valid patterns, but ‘ab {0'}' de’, ‘ab } de’ "
+"and ‘''{''’ are not. "
 
 #, java-printf-format
 #  ^^^^^^^^^^^^^^^^^^ variable.annotation.po
 msgid ""
 "%4$2s %3$2s %2$2s %1$2s"
+#^^^^^ constant.other.placeholder.po
+#      ^^^^^ constant.other.placeholder.po
+#            ^^^^^ constant.other.placeholder.po
+#                  ^^^^^ constant.other.placeholder.po
 "e = %+10.4f"
+#    ^^^^^^^ constant.other.placeholder.po
 msgstr ""
 "Amount gained or lost since last statement: $ %(,.2f"
 
@@ -65,7 +95,16 @@ msgstr ""
 #, javascript-format
 #  ^^^^^^^^^^^^^^^^^ variable.annotation.po
 msgid "%% %c = character, %s = string, %j = JSON"
+#      ^^ constant.character.escape.po
+#         ^^ constant.other.placeholder.po
+#                         ^^ constant.other.placeholder.po
+#                                      ^^ constant.other.placeholder.po
 msgstr "numbers: %b %d %o %x %X"
+#                ^^ constant.other.placeholder.po
+#                   ^^ constant.other.placeholder.po
+#                      ^^ constant.other.placeholder.po
+#                         ^^ constant.other.placeholder.po
+#                            ^^ constant.other.placeholder.po
 
 #, scheme-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
@@ -86,12 +125,21 @@ msgstr ""
 #, librep-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
 msgid "The %2$s is %1$s!"
+#          ^^^^ constant.other.placeholder.po
+#                  ^^^^ constant.other.placeholder.po
+#                      ^ - constant
 msgstr ""
 
 #, rust-format
 #  ^^^^^^^^^^^ variable.annotation.po
 msgid "{} scored {score:.1}% in {}"
+#      ^^ constant.other.placeholder.po
+#                ^^^^^^^^^^ constant.other.placeholder.po
+#                          ^ - constant
+#                               ^^ constant.other.placeholder.po
 msgstr "{:?}, {:#?}"
+#       ^^^^ constant.other.placeholder.po
+#             ^^^^^ constant.other.placeholder.po
 
 #, go-format
 #  ^^^^^^^^^ variable.annotation.po
@@ -101,20 +149,37 @@ msgstr "%[3]*.[2]*[1]f"
 #, ruby-format
 #  ^^^^^^^^^^^ variable.annotation.po
 msgid "%n$"
+#      ^^^ constant.other.placeholder.po
 msgstr "%<name> %{name} %<name>s"
+#       ^^^^^^^ constant.other.placeholder.po
+#               ^^^^^^^ constant.other.placeholder.po
+#                       ^^^^^^^^ constant.other.placeholder.po
 
 #, sh-format
 #  ^^^^^^^^^ variable.annotation.po
 msgid "form $variable or ${variable}"
+#           ^^^^^^^^^ constant.other.placeholder.po
+#                        ^^^^^^^^^^^ constant.other.placeholder.po
 msgstr ""
 "References of the form ${variable-default}, ${variable:-default}, "
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
 "${variable=default}, ${variable:=default}, ${variable+replacement}, "
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
 "${variable:+replacement}, ${variable?ignored}, ${variable:?ignored}, "
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
 "that would be valid inside shell scripts, are not supported."
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
 
 #, sh-printf-format
 #  ^^^^^^^^^^^^^^^^ variable.annotation.po
 msgid "%2d right\t%2d wrong\t(%s%%)\n"
+#      ^^^ constant.other.placeholder.po
+#               ^^ constant.character.escape.po
+#                 ^^^ constant.other.placeholder.po
+#                          ^^ constant.character.escape.po
+#                             ^^ constant.other.placeholder.po
+#                               ^^ constant.character.escape.po
+#                                  ^^ constant.character.escape.po
 msgstr ""
 
 #, awk-format
@@ -123,6 +188,7 @@ msgstr ""
 #, lua-format
 #  ^^^^^^^^^^ variable.annotation.po
 msgid "%q"
+#      ^^ constant.other.placeholder.po
 msgstr ""
 
 #, object-pascal-format
@@ -130,16 +196,27 @@ msgstr ""
 msgid ""
 msgstr ""
 "[%d]"
+# ^^ constant.other.placeholder.po
 "[%%]"
+# ^^ constant.character.escape.po
 "[%10d]"
+# ^^^^ constant.other.placeholder.po
 "[%.4d]"
+# ^^^^ constant.other.placeholder.po
 "[%10.4d]"
+# ^^^^^^ constant.other.placeholder.po
 "[%0:d]"
+# ^^^^ constant.other.placeholder.po
 "[%0:10d]"
+# ^^^^^^ constant.other.placeholder.po
 "[%0:10.4d]"
+# ^^^^^^^^ constant.other.placeholder.po
 "[%0:-10d]"
+# ^^^^^^^ constant.other.placeholder.po
 "[%0:-10.4d]"
+# ^^^^^^^^^ constant.other.placeholder.po
 "[%-*.*d]"
+# ^^^^^^ constant.other.placeholder.po
 
 #, modula2-format
 #  ^^^^^^^^^^^^^^ variable.annotation.po
@@ -170,9 +247,14 @@ msgstr ""
 msgid ""
 "a directive has either the same syntax as in a C format string, such as "
 "‘%1$+5d’, or may be surrounded by vertical bars, such as ‘%|1$+5d|’ or "
+# ^^^^^^ constant.other.placeholder.po
+#       ^ - constant
+#                                                          ^^^^^^^^ constant.other.placeholder.po
+#                                                                  ^ - constant
 "‘%|1$+5|’"
+# ^^^^^^^ constant.other.placeholder.po
+#        ^ - constant
 msgstr ""
-
 
 #, tcl-format
 #  ^^^^^^^^^^ variable.annotation.po
@@ -185,9 +267,12 @@ msgstr ""
 #  ^^^^^^^^^^ variable.annotation.po
 msgid ""
 "The %2$s contains %1$d monkeys."
+#    ^^^^ constant.other.placeholder.po
+#                  ^^^^ constant.other.placeholder.po
 "That's a nice %2$s full of %1$d monkeys."
+#              ^^^^ constant.other.placeholder.po
+#                           ^^^^ constant.other.placeholder.po
 msgstr ""
-
 
 #, gcc-internal-format
 #  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
@@ -195,3 +280,10 @@ msgstr ""
 #  ^^^^^^^^^^^^^^^^^^^ variable.annotation.po
 #, ycp-format
 #  ^^^^^^^^^^ variable.annotation.po
+
+###[ NON-PLACEHOLDERS ]########################################################
+
+msgid ""
+"The amount is written as x%, a percentage (%)"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
+msgstr ""
