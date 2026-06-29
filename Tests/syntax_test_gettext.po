@@ -174,3 +174,5 @@ msgid ""
 # <- punctuation.definition.string.begin.po
 #                                                            ^^ constant.character.escape.po
 #                                                              ^ punctuation.definition.string.end.po
+msgstr "Unclosed string
+#                      ^ invalid.illegal.unexpected-newline.po

@@ -229,6 +229,7 @@ contexts:
   string-body:
     - meta_scope: meta.string.po string.quoted.double.po
     - include: string-escapes
+    - include: pop-unexpected-eol
     - match: '"'
       scope: punctuation.definition.string.end.po
       pop: true
@@ -294,4 +295,9 @@ contexts:
 
   pop-eol:
     - match: $\n?
+      pop: true
+
+  pop-unexpected-eol:
+    - match: $\n?
+      scope: invalid.illegal.unexpected-newline.po
       pop: true
