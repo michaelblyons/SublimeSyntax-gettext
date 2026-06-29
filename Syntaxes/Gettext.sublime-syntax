@@ -208,8 +208,11 @@ contexts:
               pop: true
 
   keywords:
-    - match: \bmsgid(?:_plural)?\b
+    - match: \bmsgid\b(?!\[)
       scope: keyword.control.msgid.po
+      push: msgid-body
+    - match: \bmsgid(?:_plural|(?=\[))\b
+      scope: keyword.control.msgid.plural.po
       push: msgid-body
     - match: \bmsgstr\b(?=\[)
       scope: keyword.control.msgstr.po

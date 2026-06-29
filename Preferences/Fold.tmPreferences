@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+    <key>scope</key>
+    <string>source.po</string>
+    <key>settings</key>
+    <dict>
+        <key>indentationFoldingEnabled</key>
+        <false/>
+        <key>foldScopes</key>
+        <array>
+            <dict>
+                <key>begin</key>
+                <string>
+                    meta.block keyword.control.msgid
+                    - keyword.control.msgid.plural
+                    - comment
+                </string>
+                <key>end</key>
+                <string>
+                    meta.fold.end
+                    - meta.block
+                </string>
+                <key>excludeTrailingNewlines</key>
+                <true/>
+            </dict>
+        </array>
+    </dict>
+</dict>
+</plist>
