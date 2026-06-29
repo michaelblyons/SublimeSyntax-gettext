@@ -11,18 +11,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.documentation.po
-#^^^^^^^^^^^^ meta.mapping.key.po string.unquoted.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#^^^^^^^^^^^^ meta.mapping.key.po variable.language.po
 #            ^^ meta.mapping.po
 #            ^ punctuation.separator.key-value.po
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.po string.unquoted.po
 #                        ^ punctuation.separator.po
 #                                 ^ punctuation.separator.key-value.po
 #                                       ^^ constant.character.escape.po
-#                                         ^^ punctuation.definition.comment.end.po
+#                                         ^ punctuation.definition.string.end.po
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.documentation.po
-#^^^^^^^^^^^^ meta.mapping.key.po string.unquoted.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.po string.quoted.double.po
+#^^^^^^^^^^^^ meta.mapping.key.po variable.language.po
 #            ^^ meta.mapping.po
 #            ^ punctuation.separator.key-value.po
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.po string.unquoted.po
@@ -40,11 +42,11 @@ msgstr ""
 #                                        ^ punctuation.section.group.end.po
 #                                         ^ punctuation.separator.po
 #                                          ^^ constant.character.escape.po
-#                                            ^^ punctuation.definition.comment.end.po
+#                                            ^ punctuation.definition.string.end.po
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.documentation.po
-#^^^^^^^^^^^^ meta.mapping.key.po string.unquoted.po
+#^^^^^^^^^^^^ meta.mapping.key.po variable.language.po
 #            ^^ meta.mapping.po
 #            ^ punctuation.separator.key-value.po
 #              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.mapping.value.po string.unquoted.po
@@ -78,7 +80,7 @@ msgstr ""
 #                                                                ^ punctuation.section.group.end.po
 #                                                                  ^^ keyword.operator.boolean.po
 #                                                                                                                                                                                            ^^ constant.character.escape.po
-#                                                                                                                                                                                              ^^ punctuation.definition.comment.end.po
+#                                                                                                                                                                                              ^ punctuation.definition.string.end.po
 
 
 #^ - meta.block

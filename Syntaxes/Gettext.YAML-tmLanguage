@@ -28,13 +28,21 @@ repository:
 
   doc-block-strings:
     patterns:
-      - begin: ^"
+      - begin: ^(?=")
+        end: \s*$\n?
+        name: comment.block.documentation.po
+        patterns:
+          - include: '#doc-block-string'
+
+  doc-block-string:
+    patterns:
+      - begin: \G"
         beginCaptures:
-          '0': {name: punctuation.definition.comment.begin.po}
+          '0': {name: punctuation.definition.string.begin.po}
         end: '"$\n'
         endCaptures:
-          '0': {name: punctuation.definition.comment.end.po}
-        name: comment.block.documentation.po
+          '0': {name: punctuation.definition.string.end.po}
+        name: meta.string.po string.quoted.double.po
         patterns:
           - include: '#doc-block-kvp-generic'
           - include: '#string-escapes'
@@ -43,11 +51,11 @@ repository:
     patterns:
       - begin: \G([\w-]+)((:)\s*)
         beginCaptures:
-          '1': {name: meta.mapping.key.po string.unquoted.po}
+          '1': {name: meta.mapping.key.po variable.language.po}
           '2': {name: meta.mapping.po}
           '3': {name: punctuation.separator.key-value.po}
         end: (?=\\n?")
-        contentName: meta.mapping.value.po string.unquoted.po
+        contentName: meta.mapping.value.po
         patterns:
           - include: '#string-escapes'
           - include: '#semicolon-separators'

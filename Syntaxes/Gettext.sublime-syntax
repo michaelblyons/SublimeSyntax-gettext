@@ -30,23 +30,31 @@ contexts:
     - include: strings
 
   doc-block-strings:
-    - match: ^"
-      scope: punctuation.definition.comment.begin.po
+    - match: ^(?=")
+      scope:
+      push: doc-block-string
+
+  doc-block-string:
+    - meta_scope: comment.block.documentation.po
+    - match: \G"
+      scope: punctuation.definition.string.begin.po
       push: doc-block-string-body
+    - match: \s*$\n?
+      pop: true
 
   doc-block-string-body:
-    - meta_scope: comment.block.documentation.po
-    - match: '"$\n'
-      scope: punctuation.definition.comment.end.po
-      pop: true
+    - meta_scope: meta.string.po string.quoted.double.po
     - include: string-escapes
+    - match: '"'
+      scope: punctuation.definition.string.end.po
+      pop: true
     - include: doc-block-kvp-plural-forms
     - include: doc-block-kvp-generic
 
   doc-block-kvp-generic:
     - match: \G([\w-]+)((:)\s*)
       captures:
-        1: meta.mapping.key.po string.unquoted.po
+        1: meta.mapping.key.po variable.language.po
         2: meta.mapping.po
         3: punctuation.separator.key-value.po
       push: doc-block-kvp-generic-value
@@ -54,7 +62,7 @@ contexts:
   doc-block-kvp-plural-forms:
     - match: \G(Plural-Forms)((:)\s*)
       captures:
-        1: meta.mapping.key.po string.unquoted.po
+        1: meta.mapping.key.po variable.language.po
         2: meta.mapping.po
         3: punctuation.separator.key-value.po
       push: doc-block-kvp-generic-value

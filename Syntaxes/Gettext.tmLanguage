@@ -107,7 +107,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>meta.mapping.key.po string.unquoted.po</string>
+							<string>meta.mapping.key.po variable.language.po</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -121,7 +121,7 @@
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>meta.mapping.value.po string.unquoted.po</string>
+					<string>meta.mapping.value.po</string>
 					<key>end</key>
 					<string>(?=\\n?")</string>
 					<key>patterns</key>
@@ -144,19 +144,19 @@
 				</dict>
 			</array>
 		</dict>
-		<key>doc-block-strings</key>
+		<key>doc-block-string</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>^"</string>
+					<string>\G"</string>
 					<key>beginCaptures</key>
 					<dict>
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.begin.po</string>
+							<string>punctuation.definition.string.begin.po</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -166,11 +166,11 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.end.po</string>
+							<string>punctuation.definition.string.end.po</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>comment.block.documentation.po</string>
+					<string>meta.string.po string.quoted.double.po</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -180,6 +180,27 @@
 						<dict>
 							<key>include</key>
 							<string>#string-escapes</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+		</dict>
+		<key>doc-block-strings</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>^(?=")</string>
+					<key>end</key>
+					<string>\s*$\n?</string>
+					<key>name</key>
+					<string>comment.block.documentation.po</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#doc-block-string</string>
 						</dict>
 					</array>
 				</dict>
