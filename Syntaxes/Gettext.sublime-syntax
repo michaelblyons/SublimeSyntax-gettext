@@ -380,6 +380,7 @@ contexts:
     - match: \.\.
       scope: keyword.operator.range.po
     - include: else-pop
+    - include: pop-before-eol
 
   paths:
     - match: (?=\S)
@@ -409,6 +410,10 @@ contexts:
   pop-unexpected-eol:
     - match: $\n?
       scope: invalid.illegal.unexpected-newline.po
+      pop: true
+
+  pop-before-eol:
+    - match: (?=$)
       pop: true
 
 ###[ VARIABLES ]###############################################################

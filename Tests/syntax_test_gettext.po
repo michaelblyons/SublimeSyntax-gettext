@@ -143,7 +143,7 @@ msgstr "Error desconegut del sistema"
 #                                ^^^ constant.numeric.value.po
 #, c-format, range: 0..10
 #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po
 # <- punctuation.definition.comment.begin.po
 #  ^^^^^^^^ variable.annotation.po
 #          ^ punctuation.separator.po
@@ -176,3 +176,7 @@ msgid ""
 #                                                              ^ punctuation.definition.string.end.po
 msgstr "Unclosed string
 #                      ^ invalid.illegal.unexpected-newline.po
+
+#, c-format, range: 0..10
+msgid "found %d fatal error"
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^ - comment
