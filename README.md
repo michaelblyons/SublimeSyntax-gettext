@@ -48,7 +48,8 @@ Package Control will keep all installed packages up-to-date!
 - ~~Syntax regression tests~~
 - ~~Investigate "range" flags~~
 - Custom fold markers
-- `printf` and other string formatting placeholders
+- ~~`printf` and other string formatting placeholders~~
+  *Feel free to add more!*
 - ~~Plurals mini-language in header~~
 - Navigation by `fuzzy` or unfinished translations
 - Toggle `fuzzy` flag
