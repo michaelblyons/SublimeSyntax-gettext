@@ -2,6 +2,13 @@
 
 # https://www.gnu.org/software/gettext/manual/html_node/Sticky-flags.html
 
+#, no-c-format
+#  ^^^^^^^^ variable.annotation.po
+msgid "String `%s' has %d characters"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
+msgstr "%2$d Zeichen lang ist die Zeichenkette `%1$s'"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ - constant
+
 #, c-format
 #  ^^^^^^^^ variable.annotation.po
 msgid "String `%s' has %d characters"
@@ -58,11 +65,29 @@ msgid ""
 "Within a String, a pair of single quotes can be used to quote any "
 "arbitrary characters except single quotes. For example, pattern string "
 "‘'{0}'’ represents string ‘{0}’, not a FormatElement. A single quote itself "
+# ^^^^^ string.quoted.single.po
+# ^ punctuation.definition.string.begin.po
+#     ^ punctuation.definition.string.end.po
+#                           ^^^ constant.other.placeholder.po
 "must be represented by doubled single quotes '' throughout a String. For "
+#                                             ^^ constant.character.escape.po
 "example, pattern string ‘'{''}'’ is interpreted as a sequence of '{ (start "
+#                         ^^^^^^ string.quoted.single.po
+#                         ^ punctuation.definition.string.begin.po
+#                           ^^ constant.character.escape.po
+#                              ^ punctuation.definition.string.end.po
 "of quoting and a left curly brace), '' (a single quote), and }' (a right "
+#                                    ^^ constant.character.escape.po
 "curly brace and end of quoting), not '{' and '}' (quoted left and right "
+#                                     ^^^ string.quoted.single.po
+#                                     ^ punctuation.definition.string.begin.po
+#                                       ^ punctuation.definition.string.end.po
+#                                             ^^^ string.quoted.single.po
+#                                             ^ punctuation.definition.string.begin.po
+#                                               ^ punctuation.definition.string.end.po
 "curly braces): representing string ‘{'}’, not ‘{}’."
+#                                    ^^^ constant.other.placeholder.po
+#                                               ^^ constant.other.placeholder.po
 msgstr ""
 "A SubformatPattern is interpreted by its corresponding subformat, and "
 "subformat-dependent pattern rules apply. For example, pattern string "
@@ -74,6 +99,10 @@ msgstr ""
 "For example, pattern string '{0} is treated as pattern '{0}'.\n"
 "Any curly braces within an unquoted pattern must be balanced. For example, "
 "‘ab {0} de’ and ‘ab '}' de’ are valid patterns, but ‘ab {0'}' de’, ‘ab } de’ "
+#    ^^^ constant.other.placeholder.po
+#                    ^^^ string.quoted.single.po
+#                    ^ punctuation.definition.string.begin.po
+#                      ^ punctuation.definition.string.end.po
 "and ‘''{''’ are not. "
 
 #, java-printf-format
@@ -88,6 +117,7 @@ msgid ""
 #    ^^^^^^^ constant.other.placeholder.po
 msgstr ""
 "Amount gained or lost since last statement: $ %(,.2f"
+#                                              ^^^^^^ constant.other.placeholder.po
 
 #, csharp-format
 #  ^^^^^^^^^^^^^ variable.annotation.po
@@ -148,8 +178,10 @@ msgstr "%[3]*.[2]*[1]f"
 
 #, ruby-format
 #  ^^^^^^^^^^^ variable.annotation.po
-msgid "%n$"
-#      ^^^ constant.other.placeholder.po
+msgid "%1$*2$s %2$d %1$s"
+#      ^^^^^^^ constant.other.placeholder.po
+#              ^^^^ constant.other.placeholder.po
+#                   ^^^^ constant.other.placeholder.po
 msgstr "%<name> %{name} %<name>s"
 #       ^^^^^^^ constant.other.placeholder.po
 #               ^^^^^^^ constant.other.placeholder.po

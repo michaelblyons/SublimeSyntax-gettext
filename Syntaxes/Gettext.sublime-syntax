@@ -15,8 +15,6 @@ contexts:
     # Find indicators that the header has ended...
     - match: (?=#[:,|~=.]|msg(?:id|str)(?!\s+""))
       push:
-        - match: \b\B
-          pop: true
         - include: body
     # ...Otherwise, you're in the header.
     - include: header
@@ -120,6 +118,8 @@ contexts:
   blocks:
     - match: (?=\S)
       push: block-body
+      with_prototype:
+        - include: block-switching-comment
 
   block-body:
     - meta_content_scope: meta.block.po
@@ -130,16 +130,97 @@ contexts:
     - include: keywords
     - include: strings
 
+  block-switching-comment:
+    # Unformatted strings
+    - match: (?=#,.*no-(?:[a-z-]*)-format)
+      set: block-body
+
+    # Printf strings
+    - match: (?=#,.*\b[a-z]+-printf-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-percent
+    - match: (?=#,.*\b(?:c|javascript|librep|lua|objc|object-pascal|php|python)-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-percent
+
+    # Brace strings
+    - match: (?=#,.*\b[a-z]+-brace-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-brace
+    - match: (?=#,.*\b(?:c\+\+|csharp|rust)-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-brace
+
+    # Special babies
+    - match: (?=#,.*\bsh-format)
+      set: block-body
+      with_prototype:
+        - match: \$\w+
+          scope: constant.other.placeholder.po
+        - match: \$\{\w+\}
+          scope: constant.other.placeholder.po
+
+    - match: (?=#,.*\bjava-format)
+      set: block-body
+      with_prototype:
+        - match: "''"
+          scope: constant.character.escape.po
+        - match: \'(?=.*')
+          scope: punctuation.definition.string.begin.po
+          push:
+            - meta_scope: string.quoted.single.po
+            - match: "''"
+              scope: constant.character.escape.po
+            - match: \'
+              scope: punctuation.definition.string.end.po
+              pop: true
+        # Eat unbalanced braces with a quote in them
+        - match: \{(?=[^}\n]'(?!'))
+        - include: string-placeholders-brace
+
+    - match: (?=#,.*\bboost-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-percent
+        - match: '%\|(?=[^"\s]*\|)'
+          push:
+            - meta_scope: constant.other.placeholder.po
+            - match: \|
+              pop: true
+
+    - match: (?=#,.*\bruby-format)
+      set: block-body
+      with_prototype:
+        - include: string-placeholders-percent
+        - match: '%\{(?=[^"\s]*\})'
+          push:
+            - meta_scope: constant.other.placeholder.po
+            - match: \}
+              pop: true
+        - match: '%\<(?=[^"\s]*\>)'
+          push:
+            - meta_scope: constant.other.placeholder.po
+            - match: \>(?:\w*{{printf_suffix}})?
+              pop: true
+
   keywords:
     - match: \bmsgid(?:_plural)?\b
       scope: keyword.control.msgid.po
       push: msgid-body
+    - match: \bmsgstr\b(?=\[)
+      scope: keyword.control.msgstr.po
+      push: maybe-array
     - match: \bmsgstr\b
       scope: keyword.control.msgstr.po
+    - match: \bmsgctxt\b(?=\[)
+      scope: keyword.control.msgctxt.po
       push: maybe-array
     - match: \bmsgctxt\b
       scope: keyword.control.msgctxt.po
-      push: maybe-array
 
   maybe-array:
     - match: (\[)(\d*)(\])
@@ -233,47 +314,23 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.end.po
       pop: true
-    - include: string-placeholders
 
   string-escapes:
     - match: \\.
       scope: constant.character.escape.po
-
-  string-placeholders:
-    - include: string-placeholders-percent
-    - include: string-placeholders-dollar
-    - include: string-placeholders-brace
 
   string-placeholders-percent:
     - match: '%%'
       scope: constant.character.escape.po
     # Eat non-formatting percent symbols
     - match: '%(?=["\s\\])'
-    - match: '%[-\w.:*$+|@]+'
+    - match: '%(?:.,)?[-\w.:*$+]*{{printf_suffix}}'
       scope: constant.other.placeholder.po
-    - match: '%\{(?=[^"\s]*\})'
-      push:
-        - meta_scope: constant.other.placeholder.po
-        - match: \}
-          pop: true
-    - match: '%\<(?=[^"\s]*\>)'
-      push:
-        - meta_scope: constant.other.placeholder.po
-        - match: \>\w*
-          pop: true
     - match: '%\((?=[^"\s]*\))'
       push:
         - meta_scope: constant.other.placeholder.po
-        - match: \)\w*
+        - match: \)(?:\w*{{printf_suffix}})?
           pop: true
-
-  string-placeholders-dollar:
-    - match: \$\w+
-      scope: constant.other.placeholder.po
-    - match: \$\{\w+\}
-      scope: constant.other.placeholder.po
-    # Eat dollar-braces if not simple
-    - match: \$\{
 
   string-placeholders-brace:
     - match: \{\{|\}\}
@@ -350,3 +407,11 @@ contexts:
     - match: $\n?
       scope: invalid.illegal.unexpected-newline.po
       pop: true
+
+###[ VARIABLES ]###############################################################
+
+variables:
+  # j and b for JavaScript
+  # @ for objc
+  # q for Lua
+  printf_suffix: '[diuoxXfFeEgGaAcsp@jbq]'
