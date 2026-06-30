@@ -31,14 +31,19 @@ Package Control will keep all installed packages up-to-date!
 
 ### Snippets
 
-- `ctx` => Plural message in a context
-- `hdr` => Header
-- `id` => Message ID
-- `idp` => Message ID plural
+#### Blocks
+
 - `msg` => Simple Message
 - `msgc` => Simple message in a context
 - `msgcp` => Plural message in a context
 - `msgp` => Plural message
+
+#### Lines
+
+- `ctx` => Message context
+- `hdr` => Header
+- `id` => Message ID
+- `idp` => Message ID plural
 - `str` => Message string
 - `strp` => Message string plural
 
