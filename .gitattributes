@@ -1,5 +1,6 @@
 # Skip packaging for ST download
 /.git* export-ignore
+/Demo/** export-ignore
 *.YAML-tmLanguage export-ignore
 
 # Mark some files as generated

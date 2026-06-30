@@ -1,0 +1,25 @@
+# Headers and plural format math
+msgid ""
+msgstr ""
+"Project-Id-Version: MyProject 2.1\n"
+"Language-Team: Catalan <en@example.com>\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Line references, flags, and format placeholders
+#: src/msgcmp.c:338 src/po-lex.c:699
+#, fuzzy, c-format
+msgid "found %d fatal error"
+msgid_plural "found %d fatal errors"
+msgstr[0] "s'ha trobat %d error fatal"
+msgstr[1] "s'han trobat %d errors fatals"
+
+# Fold markers and multiline strings
+#: src/cldr-plurals.c:206 src/msgfmt.c:912 src/xgettext.c:1074
+#, c-format, no-wrap
+msgid ""
+"Mandatory arguments to long options are mandatory for short options too.\n"
+"Similarly for optional arguments.\n"
+msgstr ""
+"Els arguments obligatoris per a les opcions llargues també ho són per a les\n"
+"opcions curtes corresponents.  El mateix ocorre amb els arguments opcionals.\n"

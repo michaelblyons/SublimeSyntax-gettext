@@ -3,6 +3,24 @@
 [Sublime Text][st] support
 for [`gettext`][gt] [Portable Object][po] (`.po`) files.
 
+![Screenshot demonstrating some features listed below](Demo/sample.png)
+
+
+## Features
+
+- Scopes for colors follow Sublime Text conventions
+- Syntax highlighting for documentation key-values
+    + Mini-language for `Plural-Formats`
+- Goto Symbol for `msgid` contents
+    + Even for multiline strings.
+      See Known Issues below.
+- Fold markers from `msgid` through the end of the block
+- Flag-dependent placeholder formats for
+    + Programming languages that use `printf` formatting
+    + Programming languages with `{`/`}` brace placeholders
+    + Shell's `$` dollar variables
+    + Whatever you decide to add
+
 
 ## Installation
 
@@ -58,6 +76,16 @@ Package Control will keep all installed packages up-to-date!
 - ~~Plurals mini-language in header~~
 - Navigation by `fuzzy` or unfinished translations
 - Toggle `fuzzy` flag
+- Go to source reference
+
+
+## Known issues
+
+- When the `msgid` contents are long,
+  Goto Symbol may not find phrases in the middle.
+- Placeholders in string content are shared
+  between language families.
+  The formats may not be perfect.
 
 
 ## Credits
