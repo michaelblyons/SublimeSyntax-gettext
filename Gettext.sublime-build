@@ -1,0 +1,5 @@
+{
+    "selector": "source.po",
+    "cmd": ["msgfmt", "$file_name", "--output-file=$file_base_name.mo"],
+    "file_regex": "^(.+\\.po):(?:(\\d+):(?:(\\d+):)?)? (.*)",
+}

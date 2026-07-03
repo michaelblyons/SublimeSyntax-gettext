@@ -47,6 +47,12 @@ Package Control will keep all installed packages up-to-date!
 
 ## Usage
 
+### Build
+
+Use <kbd>Ctrl</kbd>+<kbd>B</kbd> to invoke a simple `.mo` build system
+for the currently opened `.po` file.
+(<kbd>Cmd</kbd>+</kbd>B</kbd> on Mac)
+
 ### Snippets
 
 #### Blocks
@@ -77,6 +83,7 @@ Package Control will keep all installed packages up-to-date!
 - Navigation by `fuzzy` or unfinished translations
 - Toggle `fuzzy` flag
 - Go to source reference
+- More build variants
 
 
 ## Known issues

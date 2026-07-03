@@ -4,6 +4,7 @@ msgstr ""
 "Project-Id-Version: MyProject 2.1\n"
 "Language-Team: Catalan <en@example.com>\n"
 "Language: ca\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Line references, flags, and format placeholders
