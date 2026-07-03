@@ -1,0 +1,16 @@
+[
+    {
+        "keys": ["primary+p"],
+        "command": "gettext_lookup_sourceref",
+        "context": [
+            {"key": "selector", "operator": "equal", "operand": "source.po markup.underline.link"},
+        ],
+    },
+    {
+        "keys": ["f12"],
+        "command": "gettext_lookup_sourceref",
+        "context": [
+            {"key": "selector", "operator": "equal", "operand": "source.po markup.underline.link"},
+        ],
+    },
+]
