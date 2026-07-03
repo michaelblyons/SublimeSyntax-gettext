@@ -51,7 +51,7 @@ Package Control will keep all installed packages up-to-date!
 
 Use <kbd>Ctrl</kbd>+<kbd>B</kbd> to invoke a simple `.mo` build system
 for the currently opened `.po` file.
-(<kbd>Cmd</kbd>+</kbd>B</kbd> on Mac)
+(<kbd>Cmd</kbd>+<kbd>B</kbd> on Mac)
 
 
 ### Source reference lookup
@@ -83,7 +83,7 @@ If your cursor is on a source reference in a `#:` comment,
 
 - ~~Syntax regression tests~~
 - ~~Investigate "range" flags~~
-- Custom fold markers
+- ~~Custom fold markers~~
 - ~~`printf` and other string formatting placeholders~~
   *Feel free to add more!*
 - ~~Plurals mini-language in header~~
@@ -100,6 +100,7 @@ If your cursor is on a source reference in a `#:` comment,
 - Placeholders in string content are shared
   between language families.
   The formats may not be perfect.
+- The source reference lookup is a bit naive.
 
 
 ## Credits
