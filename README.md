@@ -1,7 +1,7 @@
 # sublime-gettext
 
 [Sublime Text][st] support
-for [`gettext`][gt] [Portable Object][po] (`.po`) files.
+for [`gettext`][gt]'s [Portable Object][po] (`.po`) translation files.
 
 ![Screenshot demonstrating some features listed below](Demo/sample.png)
 
