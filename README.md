@@ -53,6 +53,13 @@ Use <kbd>Ctrl</kbd>+<kbd>B</kbd> to invoke a simple `.mo` build system
 for the currently opened `.po` file.
 (<kbd>Cmd</kbd>+</kbd>B</kbd> on Mac)
 
+
+### Source reference lookup
+
+If your cursor is on a source reference in a `#:` comment,
+<kbd>F12</kbd> will prefill it in the GoTo overlay.
+
+
 ### Snippets
 
 #### Blocks
@@ -82,7 +89,7 @@ for the currently opened `.po` file.
 - ~~Plurals mini-language in header~~
 - Navigation by `fuzzy` or unfinished translations
 - Toggle `fuzzy` flag
-- Go to source reference
+- ~~Go to source reference~~
 - More build variants
 
 

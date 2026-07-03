@@ -132,8 +132,7 @@ msgstr "Error desconegut del sistema"
 
 # <- meta.fold.end - meta.block
 #: src/msgcmp.c:338 src/po-lex.c:699
-#^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.reference.po
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po comment.line.number-sign.reference.po
 # <- punctuation.definition.comment.begin.po
 #  ^^^^^^^^^^^^ entity.name.path.po
 #              ^ punctuation.separator.sequence.po
@@ -141,6 +140,24 @@ msgstr "Error desconegut del sistema"
 #                   ^^^^^^^^^^^^ entity.name.path.po
 #                               ^ punctuation.separator.sequence.po
 #                                ^^^ constant.numeric.value.po
+#: "Preferences/Fold.tmPreferences":12 "src with spaces/po-lex.c":699
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block comment.line.number-sign.reference.po
+# <- punctuation.definition.comment.begin.po
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.underline.link.po
+#  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.po
+#  ^ punctuation.definition.string.begin.po
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.path.po
+#                                 ^ string.quoted.double.po punctuation.definition.string.end.po
+#                                  ^ markup.underline.link.po punctuation.separator.sequence.po
+#                                   ^^ markup.underline.link.po meta.number.integer.decimal.po constant.numeric.value.po
+#                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ markup.underline.link.po
+#                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.po
+#                                      ^ punctuation.definition.string.begin.po
+#                                       ^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.path.po
+#                                                               ^ string.quoted.double.po punctuation.definition.string.end.po
+#                                                                ^ markup.underline.link.po punctuation.separator.sequence.po
+#                                                                 ^^^ markup.underline.link.po meta.number.integer.decimal.po constant.numeric.value.po
+
 #, c-format, range: 0..10
 #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.po
 #^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.flag.po

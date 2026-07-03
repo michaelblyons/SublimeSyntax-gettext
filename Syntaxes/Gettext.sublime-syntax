@@ -295,12 +295,7 @@ contexts:
   line-comments-sourceref-body:
     - meta_scope: comment.line.number-sign.reference.po
     - include: pop-eol
-    - match: (:)(\d+)(?=\s)
-      captures:
-        1: punctuation.separator.sequence.po
-        2: meta.number.integer.decimal.po constant.numeric.value.po
     - include: semicolon-separators
-    - include: strings
     - include: paths
 
 ###[ STRINGS ]#################################################################
@@ -345,6 +340,54 @@ contexts:
           pop: true
         - include: string-placeholders-brace
 
+###[ PATHS ]###################################################################
+
+  paths:
+    - match: (?=\S)
+      push:
+        - path-meta
+        - line-number
+        - path
+
+  path-meta:
+    - meta_scope: markup.underline.link.po
+    - include: immediately-pop
+
+  line-number:
+    - match: (:)(\d+)(?=\s)
+      captures:
+        1: punctuation.separator.sequence.po
+        2: meta.number.integer.decimal.po constant.numeric.value.po
+      pop: true
+    - include: immediately-pop
+
+  path:
+    - match: '"'
+      scope: punctuation.definition.string.begin.po
+      push: path-string-body
+    - match: (?=[^\s,;:])
+      push: path-body
+    - include: else-pop
+
+  path-body:
+    - meta_scope: entity.name.path.po
+    - match: (?=[\s,;:])
+      pop: true
+    - include: path-separators
+
+  path-string-body:
+    - meta_scope: string.quoted.double.po
+    - meta_content_scope: entity.name.path.po
+    - match: '"'
+      scope: punctuation.definition.string.end.po
+      pop: true
+    - include: string-escapes
+    - include: path-separators
+
+  path-separators:
+    - match: /
+      scope: punctuation.separator.sequence.po
+
 ###[ ELEMENTS ]################################################################
 
   comma-separators:
@@ -382,17 +425,6 @@ contexts:
     - include: else-pop
     - include: pop-before-eol
 
-  paths:
-    - match: (?=\S)
-      push: path-body
-
-  path-body:
-    - meta_scope: entity.name.path.po
-    - match: (?=[:\s])
-      pop: true
-    - match: /
-      scope: punctuation.separator.sequence.po
-
   integers:
     - match: \d+
       scope: meta.number.integer.decimal.po constant.numeric.value.po
@@ -414,6 +446,10 @@ contexts:
 
   pop-before-eol:
     - match: (?=$)
+      pop: true
+
+  immediately-pop:
+    - match: ''
       pop: true
 
 ###[ VARIABLES ]###############################################################
