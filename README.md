@@ -13,7 +13,7 @@ for [`gettext`][gt]'s [Portable Object][po] (`.po`) translation files.
     + Mini-language for `Plural-Formats`
 - Goto Symbol for `msgid` contents
     + Even for multiline strings.
-      See Known Issues below.
+      See [Known Issues][] below.
 - Fold markers from `msgid` through the end of the block
 - Flag-dependent placeholder formats for
     + Programming languages that use `printf` formatting
@@ -62,35 +62,18 @@ If your cursor is on a source reference in a `#:` comment,
 
 ### Snippets
 
-#### Blocks
-
-- `msg` => Simple Message
-- `msgc` => Simple message in a context
-- `msgcp` => Plural message in a context
-- `msgp` => Plural message
-
-#### Lines
-
-- `ctx` => Message context
-- `hdr` => Header
-- `id` => Message ID
-- `idp` => Message ID plural
-- `str` => Message string
-- `strp` => Message string plural
-
-
-## Todo
-
-- ~~Syntax regression tests~~
-- ~~Investigate "range" flags~~
-- ~~Custom fold markers~~
-- ~~`printf` and other string formatting placeholders~~
-  *Feel free to add more!*
-- ~~Plurals mini-language in header~~
-- Navigation by `fuzzy` or unfinished translations
-- Toggle `fuzzy` flag
-- ~~Go to source reference~~
-- More build variants
+| Type  | Trigger | Description                 |
+|-------|---------|-----------------------------|
+| Block | `msg`   | Simple message              |
+| Block | `msgc`  | Simple message in a context |
+| Block | `msgp`  | Plural message              |
+| Block | `msgcp` | Plural message in a context |
+| Line  | `hdr`   | Header key-value pair       |
+| Line  | `ctx`   | Message context             |
+| Line  | `id`    | Message ID                  |
+| Line  | `idp`   | Plural message ID           |
+| Line  | `str`   | Message string              |
+| Line  | `strp`  | Plural message string       |
 
 
 ## Known issues
@@ -110,5 +93,6 @@ If your cursor is on a source reference in a `#:` comment,
 [st]: https://www.sublimetext.com
 [gt]: https://www.gnu.org/software/gettext/
 [po]: https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html
+[known issues]: #known-issues
 [pc]: https://packagecontrol.io
 [auto_upgrade]: http://wbond.net/sublime_packages/package_control/settings/
